@@ -18,7 +18,7 @@ class MUFGAdapter(var list:ArrayList<MUFG>,var context:Context): RecyclerView.Ad
 		Glide.with(context)
 				.load(R.raw.mufg_capsule)
 				.into(holder.mufgImage)
-		holder.mufgNumber.text=list[position].number
+		holder.mufgID.text=list[position].number
 	}
 
 	override fun getItemCount(): Int
@@ -36,5 +36,6 @@ class MUFGAdapter(var list:ArrayList<MUFG>,var context:Context): RecyclerView.Ad
 	{
 		var mufgImage=itemView.findViewById<ImageView>(R.id.mufgImage)
 		var mufgNumber=itemView.findViewById<TextView>(R.id.mufgNumber)
+		var mufgID=itemView.findViewById<TextView>(R.id.mufgID)
 	}
 }

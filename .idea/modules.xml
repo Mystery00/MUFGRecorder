@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MUFGRecorder.iml" filepath="$PROJECT_DIR$/MUFGRecorder.iml" />
+      <module fileurl="file://D:\program\Android Studio\MUFGRecorder\MUFGRecorder.iml" filepath="D:\program\Android Studio\MUFGRecorder\MUFGRecorder.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\program\Android Studio\MUFGRecorder\app\app.iml" filepath="D:\program\Android Studio\MUFGRecorder\app\app.iml" />
     </modules>
   </component>
 </project>

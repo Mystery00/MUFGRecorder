@@ -11,7 +11,6 @@ import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.adapter.MUFGAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import org.litepal.crud.DataSupport
 
 class MainActivity : AppCompatActivity()
 {
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity()
 		}
 
 		val list: ArrayList<MUFG> = ArrayList()
-		list.addAll(DataSupport.findAll(MUFG::class.java))
 
 		recyclerView.layoutManager = LinearLayoutManager(this)
 		recyclerView.adapter = MUFGAdapter(list, this)

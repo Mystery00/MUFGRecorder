@@ -113,7 +113,6 @@ class EditMUFGActivity : AppCompatActivity()
 			R.id.action_done ->
 			{
 				mufg!!.contentMap = ingressUtil!!.ConvertItemsFormat(adapter!!.getList())
-				mufg!!.save()
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)

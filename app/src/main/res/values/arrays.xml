@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ingress_items_level_things">
+        <item>Portal Shield</item><!--item level-->
+        <item>Link Amp</item><!--item level-->
+        <item>Heat Sink</item><!--item level-->
+        <item>Multi-hack</item><!--item level-->
+    </string-array>
+    <string-array name="ingress_level_things">
+        <item>Power Cube</item><!--level-->
+        <item>Resonator</item><!--level-->
+        <item>Xmp Burster</item><!--level-->
+        <item>Ultra Strike</item><!--level-->
+    </string-array>
+    <string-array name="ingress_items">
+        <item>media</item>
+        <item>Portal Shield</item><!--item level-->
+        <item>AXA Shield</item>
+        <item>Link Amp</item><!--item level-->
+        <item>SoftBank</item>
+        <item>Heat Sink</item><!--item level-->
+        <item>Multi-hack</item><!--item level-->
+        <item>Force Amp</item>
+        <item>Turret</item>
+        <item>Portal Key</item>
+        <item>Power Cube</item><!--level-->
+        <item>Resonator</item><!--level-->
+        <item>Xmp Burster</item><!--level-->
+        <item>Ultra Strike</item><!--level-->
+        <item>Jarvis Virus</item>
+        <item>ADA Refactor</item>
+    </string-array>
+    <string-array name="Power_Cube">
+        <item>Power Cube</item>
+        <item>Lawson Power Cube</item>
+        <item>Circle-K Power Cube</item>
+    </string-array>
+    <string-array name="ingress_item_level">
+        <item>common</item>
+        <item>Rare</item>
+        <item>Very Rare</item>
+    </string-array>
+    <string-array name="ingress_level">
+        <item>LV1</item>
+        <item>LV2</item>
+        <item>LV3</item>
+        <item>LV4</item>
+        <item>LV5</item>
+        <item>LV6</item>
+        <item>LV7</item>
+        <item>LV8</item>
+    </string-array>
+</resources>

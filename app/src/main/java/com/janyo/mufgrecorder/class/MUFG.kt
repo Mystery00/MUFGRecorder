@@ -1,3 +1,8 @@
 package com.janyo.mufgrecorder.`class`
 
-class MUFG(var number:String)
+import org.litepal.crud.DataSupport
+
+class MUFG(var id:String):DataSupport()
+{
+	var contentMap:Map<String,Int> ?=HashMap()
+}

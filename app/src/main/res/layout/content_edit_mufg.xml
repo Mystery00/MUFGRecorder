@@ -7,5 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.janyo.mufgrecorder.activity.NewMUFGActivity"
-    tools:showIn="@layout/activity_new_mufg"/>
+    tools:context="com.janyo.mufgrecorder.activity.EditMUFGActivity"
+    tools:showIn="@layout/activity_edit_mufg"/>

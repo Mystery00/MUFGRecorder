@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/coordinatorLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.janyo.mufgrecorder.activity.NewMUFGActivity">
+    tools:context="com.janyo.mufgrecorder.activity.EditMUFGActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_new_mufg"/>
+    <include layout="@layout/content_edit_mufg"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

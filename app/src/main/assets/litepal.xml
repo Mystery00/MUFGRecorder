@@ -6,4 +6,6 @@
     <list>
         <mapping class="com.janyo.mufgrecorder.class.MUFG" />
     </list>
+
+    <storage value="external" />
 </litepal>

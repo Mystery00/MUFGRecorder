@@ -5,5 +5,12 @@
 
     <string name="mufg_pre_name">MUFG Capsule %1$s</string>
     <string name="mufg_space">%1$s/100</string>
-    <string name="title_activity_new_mufg">NewMUFGActivity</string>
+
+    <string name="title_set_mufg_id">Please Enter the ID of new MUFG</string>
+    <string name="title_check_items_of_new_mufg">Please check the items</string>
+    <string name="title_create_new_mufg">Create New MUFG</string>
+    <string name="title_choose_level">Please choose the level of this thing</string>
+
+    <string name="hint_id_invalid">The ID is invalid!</string>
+    <string name="action_done">Done</string>
 </resources>

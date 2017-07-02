@@ -1,6 +1,8 @@
 package com.janyo.mufgrecorder.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,23 +12,31 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.janyo.mufgrecorder.R
 import com.janyo.mufgrecorder.`class`.MUFG
+import com.janyo.mufgrecorder.activity.EditMUFGActivity
 import com.mystery0.tools.Logs.Logs
 
 class MUFGAdapter(var list: ArrayList<MUFG>,
 				  var context: Context) : RecyclerView.Adapter<MUFGAdapter.ViewHolder>()
 {
 	private val TAG = "MUFGAdapter"
+	private val INTENT_TAG = "MUFG"
+
 	override fun onBindViewHolder(holder: ViewHolder, position: Int)
 	{
+		val mufg=list[position]
 		Glide.with(context)
 				.load(R.raw.mufg_capsule)
 				.into(holder.mufgImage)
-		holder.mufgID.text = String.format(context.getString(R.string.mufg_pre_name), list[position].id)
+		holder.mufgID.text = String.format(context.getString(R.string.mufg_pre_name), mufg.MUFGID)
 		holder.mufgNumber.text = (position + 1).toString()
-		val space = list[position].contentMap!!.keys.sumBy { list[position].contentMap!![it] as Int }
+		val space = mufg.contentMap.keys.sumBy { mufg.contentMap[it] as Int }
 		holder.mufgSpace.text = String.format(context.getString(R.string.mufg_space), space.toString())
 		holder.fullView.setOnClickListener {
-			Logs.i(TAG, "onBindViewHolder: " + position)
+			val intent = Intent(context, EditMUFGActivity::class.java)
+			val bundle = Bundle()
+			bundle.putSerializable(INTENT_TAG, mufg)
+			intent.putExtra(INTENT_TAG, bundle)
+			context.startActivity(intent)
 		}
 	}
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/levelSpinner"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/levelSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/itemNumber"
+        android:entries="@array/ingress_level"
+        android:prompt="@string/title_choose_level"
+        android:spinnerMode="dialog"
+        android:visibility="gone"/>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/itemLevelSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/itemNumber"
+        android:entries="@array/ingress_item_level"
+        android:prompt="@string/title_choose_level"
+        android:spinnerMode="dialog"
+        android:visibility="gone"/>
+
+    <NumberPicker
+        android:id="@+id/itemNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#000000"/>
+
+</RelativeLayout>

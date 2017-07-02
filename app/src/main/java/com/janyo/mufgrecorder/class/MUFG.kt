@@ -1,8 +1,9 @@
 package com.janyo.mufgrecorder.`class`
 
 import org.litepal.crud.DataSupport
+import java.io.Serializable
 
-class MUFG(var id:String):DataSupport()
+class MUFG(var MUFGID: String) : DataSupport(), Serializable
 {
-	var contentMap:Map<String,Int> ?=HashMap()
+	var contentMap: HashMap<String, Int> = HashMap()
 }

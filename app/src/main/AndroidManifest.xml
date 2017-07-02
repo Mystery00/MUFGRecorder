@@ -20,8 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.NewMUFGActivity"
-            android:label="@string/title_activity_new_mufg"
+            android:name=".activity.EditMUFGActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

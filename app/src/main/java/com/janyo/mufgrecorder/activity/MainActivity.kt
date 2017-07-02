@@ -2,7 +2,6 @@ package com.janyo.mufgrecorder.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -12,6 +11,7 @@ import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.adapter.MUFGAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import org.litepal.crud.DataSupport
 
 class MainActivity : AppCompatActivity()
 {
@@ -22,14 +22,11 @@ class MainActivity : AppCompatActivity()
 		setSupportActionBar(toolbar)
 
 		fab.setOnClickListener {
-			startActivity(Intent(this, NewMUFGActivity::class.java))
+			startActivity(Intent(this, EditMUFGActivity::class.java))
 		}
 
 		val list: ArrayList<MUFG> = ArrayList()
-		list.add(MUFG("1"))
-		list.add(MUFG("2"))
-		list.add(MUFG("3"))
-		list.add(MUFG("4"))
+		list.addAll(DataSupport.findAll(MUFG::class.java))
 
 		recyclerView.layoutManager = LinearLayoutManager(this)
 		recyclerView.adapter = MUFGAdapter(list, this)
@@ -37,7 +34,7 @@ class MainActivity : AppCompatActivity()
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean
 	{
-		menuInflater.inflate(R.menu.main, menu)
+		menuInflater.inflate(R.menu.menu_main, menu)
 		return true
 	}
 

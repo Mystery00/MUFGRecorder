@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="key_notification">key_notification</string>
     <string name="key_set_notification_time">key_set_notification_time</string>
 </resources>

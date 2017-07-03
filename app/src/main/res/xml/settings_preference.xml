@@ -2,8 +2,17 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference
-        android:key="@string/key_set_notification_time"
-        android:title="@string/title_set_notification_time"/>
+    <PreferenceCategory
+        android:title="@string/title_notification">
+
+        <SwitchPreference
+            android:key="@string/key_notification"
+            android:title="@string/title_notification"/>
+
+        <Preference
+            android:key="@string/key_set_notification_time"
+            android:title="@string/title_set_notification_time"/>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

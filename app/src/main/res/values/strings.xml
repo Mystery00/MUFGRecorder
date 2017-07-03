@@ -12,8 +12,10 @@
     <string name="title_create_new_mufg">Create New MUFG</string>
     <string name="title_choose_level">Please choose the level of this thing</string>
 
+    <string name="title_notification">Notification</string>
     <string name="title_set_notification_time">Set Notification Time</string>
     <string name="summary_set_notification_time">Now set at %1$s</string>
 
     <string name="hint_id_invalid">The ID is invalid!</string>
+    <string name="hint_set_notification">I will notify you after %1$.1f hour%2$s</string>
 </resources>

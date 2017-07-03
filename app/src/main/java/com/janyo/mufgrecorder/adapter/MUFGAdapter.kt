@@ -13,12 +13,10 @@ import com.bumptech.glide.Glide
 import com.janyo.mufgrecorder.R
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.activity.EditMUFGActivity
-import com.mystery0.tools.Logs.Logs
 
 class MUFGAdapter(var list: ArrayList<MUFG>,
 				  var context: Context) : RecyclerView.Adapter<MUFGAdapter.ViewHolder>()
 {
-	private val TAG = "MUFGAdapter"
 	private val INTENT_TAG = "MUFG"
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int)

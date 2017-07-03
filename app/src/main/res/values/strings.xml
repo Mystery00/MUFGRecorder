@@ -18,4 +18,6 @@
 
     <string name="hint_id_invalid">The ID is invalid!</string>
     <string name="hint_set_notification">I will notify you after %1$.1f hour%2$s</string>
+    <string name="hint_out_of_number">The number of items cannot be more than 100! </string>
+    <string name="hint_mufg_saved">This MUFG Capsule saved! </string>
 </resources>

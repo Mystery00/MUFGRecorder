@@ -41,6 +41,12 @@ class EditMUFGActivity : AppCompatActivity()
 		ingressUtil = IngressUtil(this)
 		fileUtil = FileUtil(this)
 
+		items = resources.getStringArray(R.array.ingress_items)
+		for (temp in items!!)
+		{
+			checkedMap.put(temp, false)
+		}
+
 		if (intent.getBundleExtra(INTENT_TAG) == null)
 		{
 			val view = LayoutInflater.from(this).inflate(R.layout.text_input_layout, TextInputLayout(this), false)
@@ -81,13 +87,6 @@ class EditMUFGActivity : AppCompatActivity()
 			recyclerView.adapter = adapter
 		}
 
-		items = resources.getStringArray(R.array.ingress_items)
-
-		for (temp in items!!)
-		{
-			checkedMap.put(temp, false)
-		}
-
 		fab.setOnClickListener {
 			AlertDialog.Builder(this)
 					.setTitle(R.string.title_check_items_of_new_mufg)
@@ -121,8 +120,29 @@ class EditMUFGActivity : AppCompatActivity()
 		{
 			R.id.action_done ->
 			{
-				mufg!!.contentMap = ingressUtil!!.ConvertItemsFormat(adapter!!.getList())
-				fileUtil!!.saveObject(mufg!!, mufg!!.MUFGID, "MUFG")
+				val contentMap = ingressUtil!!.ConvertItemsFormat(adapter!!.getList())
+				if (contentMap.keys.sumBy { contentMap[it] as Int } <= 100)
+				{
+					mufg!!.contentMap = contentMap
+					fileUtil!!.saveObject(mufg!!, mufg!!.MUFGID, "MUFG")
+					Snackbar.make(coordinatorLayout,R.string.hint_mufg_saved,Snackbar.LENGTH_SHORT)
+							.addCallback(object : Snackbar.Callback()
+							{
+								override fun onDismissed(transientBottomBar: Snackbar?, event: Int)
+								{
+									if (event != Snackbar.Callback.DISMISS_EVENT_ACTION)
+									{
+										finish()
+									}
+								}
+							})
+							.show()
+				}
+				else
+				{
+					Snackbar.make(coordinatorLayout, R.string.hint_out_of_number, Snackbar.LENGTH_SHORT)
+							.show()
+				}
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)

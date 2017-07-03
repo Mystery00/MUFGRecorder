@@ -6,65 +6,35 @@ import java.util.HashMap
 
 class IngressUtil(val context: Context)
 {
-	private val TAG = "IngressUtil"
 
-	fun CheckItems(checkedMap: Map<String, Boolean>): Map<String, Int>
+	fun ConvertArrayToList(checked: BooleanArray,
+						   items: Array<String>): ArrayList<HashMap<String, Any>>
 	{
-		val map = HashMap<String, Int>()
 		val item_level = context.resources.getStringArray(R.array.ingress_items_level_things)
 		val level = context.resources.getStringArray(R.array.ingress_level_things)
-		for (item in checkedMap.keys)
-		{
-			if (checkedMap[item] == false)
-			{
-				continue
-			}
-			if (item_level.contains(item))
-			{
-				map.put(item + "!1!0", 0)
-				continue
-			}
-			if (level.contains(item))
-			{
-				map.put(item + "!2!0", 0)
-				continue
-			}
-			map.put(item, 0)
-		}
-		return map
-	}
-
-	fun ConvertItemsFormat(map: Map<String, Int>): ArrayList<HashMap<String, Any>>
-	{
 		val list = ArrayList<HashMap<String, Any>>()
-		for (name in map.keys)
+		val map = HashMap<String, Any>()
+		for (i in checked.indices)
 		{
-			val temp = HashMap<String, Any>()
-			val names = name.split("!")
-			temp.put("name", names[0])
-			if (names.size > 1)
+			if (!checked[i])
 			{
-				temp.put("type", names[1].toInt())
-				temp.put("level", names[2].toInt())
+				continue
 			}
-			temp.put("number", map[name] as Int)
-			list.add(temp)
+			map.put("name", items[i])
+			map.put("number", 0)
+			if (item_level.contains(items[i]))
+			{
+				map.put("type", 1)
+				list.add(map)
+				continue
+			}
+			if (level.contains(items[i]))
+			{
+				map.put("type", 2)
+				list.add(map)
+				continue
+			}
 		}
 		return list
-	}
-
-	fun ConvertItemsFormat(list: ArrayList<HashMap<String, Any>>): HashMap<String, Int>
-	{
-		val map = HashMap<String, Int>()
-		for (item in list)
-		{
-			var name = item["name"] as String
-			if (item.containsKey("level"))
-			{
-				name += "!" + item["type"] + "!" + item["level"]
-			}
-			map.put(name, item["number"] as Int)
-		}
-		return map
 	}
 }

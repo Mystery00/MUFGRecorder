@@ -17,7 +17,6 @@ import com.janyo.mufgrecorder.util.IngressUtil
 
 import kotlinx.android.synthetic.main.activity_edit_mufg.*
 import kotlinx.android.synthetic.main.content_edit_mufg.*
-import java.util.*
 
 
 class EditMUFGActivity : AppCompatActivity()
@@ -26,7 +25,6 @@ class EditMUFGActivity : AppCompatActivity()
 	private var ingressUtil: IngressUtil? = null
 	private var fileUtil: FileUtil? = null
 	private var items: Array<String>? = null
-	private var checkedMap = HashMap<String, Boolean>()//选择的物品列表
 	private var checked: BooleanArray? = null
 	private var adapter: MUFGItemsAdapter? = null
 	private var mufg: MUFG? = null
@@ -46,7 +44,6 @@ class EditMUFGActivity : AppCompatActivity()
 		checked = kotlin.BooleanArray(items!!.size)
 		for (i in items!!.indices)
 		{
-			checkedMap.put(items!![i], false)
 			checked!![i] = false
 		}
 
@@ -86,26 +83,13 @@ class EditMUFGActivity : AppCompatActivity()
 			@Suppress("CAST_NEVER_SUCCEEDS")
 			mufg = intent.getBundleExtra(INTENT_TAG).getSerializable(INTENT_TAG) as MUFG
 			recyclerView.layoutManager = LinearLayoutManager(this)
-			adapter = MUFGItemsAdapter(this, mufg!!.contentMap)
+			adapter = MUFGItemsAdapter(mufg!!.content)
 			recyclerView.adapter = adapter
-			for (map in mufg!!.contentMap.keys)
+			for (map in mufg!!.content)
 			{
-				for (i in items!!.indices)
-				{
-					if (map.contains(items!![i]))
-					{
-						checked!![i] = true
-						break
-					}
-				}
-				for (temp in checkedMap.keys)
-				{
-					if (map.contains(temp))
-					{
-						checkedMap.put(temp, true)
-						break
-					}
-				}
+				items!!.indices
+						.filter { map["name"] == items!![it] }
+						.forEach { checked!![it] = true }
 			}
 		}
 
@@ -113,11 +97,11 @@ class EditMUFGActivity : AppCompatActivity()
 			AlertDialog.Builder(this)
 					.setTitle(R.string.title_check_items_of_new_mufg)
 					.setMultiChoiceItems(items, checked, { _, position, checked ->
-						checkedMap[items!![position]] = checked
+						this.checked!![position] = checked
 					})
 					.setPositiveButton(android.R.string.ok, { _, _ ->
 						recyclerView.layoutManager = LinearLayoutManager(this)
-						adapter = MUFGItemsAdapter(this, ingressUtil!!.CheckItems(checkedMap))
+						adapter = MUFGItemsAdapter(ingressUtil!!.ConvertArrayToList(checked!!, items!!))
 						recyclerView.adapter = adapter
 						menu!!.findItem(R.id.action_done).isVisible = true
 					})
@@ -142,10 +126,9 @@ class EditMUFGActivity : AppCompatActivity()
 		{
 			R.id.action_done ->
 			{
-				val contentMap = ingressUtil!!.ConvertItemsFormat(adapter!!.getList())
-				if (contentMap.keys.sumBy { contentMap[it] as Int } <= 100)
+				if (adapter!!.list.sumBy { it["number"] as Int } <= 100)
 				{
-					mufg!!.contentMap = contentMap
+					mufg!!.content = adapter!!.list
 					fileUtil!!.saveObject(mufg!!, mufg!!.MUFGID, "MUFG")
 					Snackbar.make(coordinatorLayout, R.string.hint_mufg_saved, Snackbar.LENGTH_SHORT)
 							.addCallback(object : Snackbar.Callback()

@@ -21,13 +21,13 @@ class MUFGAdapter(var list: ArrayList<MUFG>,
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int)
 	{
-		val mufg=list[position]
+		val mufg = list[position]
 		Glide.with(context)
 				.load(R.raw.mufg_capsule)
 				.into(holder.mufgImage)
 		holder.mufgID.text = String.format(context.getString(R.string.mufg_pre_name), mufg.MUFGID)
 		holder.mufgNumber.text = (position + 1).toString()
-		val space = mufg.contentMap.keys.sumBy { mufg.contentMap[it] as Int }
+		val space = mufg.content.sumBy { it["number"] as Int }
 		holder.mufgSpace.text = String.format(context.getString(R.string.mufg_space), space.toString())
 		holder.fullView.setOnClickListener {
 			val intent = Intent(context, EditMUFGActivity::class.java)

@@ -1,6 +1,5 @@
 package com.janyo.mufgrecorder.adapter
 
-import android.content.Context
 import android.support.v7.widget.AppCompatSpinner
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,24 +10,12 @@ import android.widget.LinearLayout
 import android.widget.NumberPicker
 import android.widget.TextView
 import com.janyo.mufgrecorder.R
-import com.janyo.mufgrecorder.util.IngressUtil
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class MUFGItemsAdapter(context: Context,
-					   map: Map<String, Int>) : RecyclerView.Adapter<MUFGItemsAdapter.ViewHolder>()
+class MUFGItemsAdapter(
+		var list: ArrayList<HashMap<String, Any>>) : RecyclerView.Adapter<MUFGItemsAdapter.ViewHolder>()
 {
-	private var list = ArrayList<HashMap<String, Any>>()
-	private var ingressUtil: IngressUtil? = null
-
-	init
-	{
-		ingressUtil = IngressUtil(context)
-		val tempList = ingressUtil!!.ConvertItemsFormat(map)
-		list.clear()
-		list.addAll(tempList)
-	}
-
 	override fun getItemCount(): Int
 	{
 		return list.size
@@ -93,11 +80,6 @@ class MUFGItemsAdapter(context: Context,
 		holder.itemNumber.setOnValueChangedListener { _, _, newValue ->
 			map.put("number", newValue)
 		}
-	}
-
-	fun getList(): ArrayList<HashMap<String, Any>>
-	{
-		return list
 	}
 
 	class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

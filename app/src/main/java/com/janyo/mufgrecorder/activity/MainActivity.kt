@@ -16,7 +16,6 @@ import com.janyo.mufgrecorder.util.FileUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
-
 class MainActivity : AppCompatActivity()
 {
 	private var fileUtil: FileUtil? = null
@@ -88,7 +87,7 @@ class MainActivity : AppCompatActivity()
 	}
 }
 
-class MyHandler(var adapter: MUFGAdapter,
+private class MyHandler(var adapter: MUFGAdapter,
 				var swipeRefreshLayout: SwipeRefreshLayout) : Handler()
 {
 	override fun handleMessage(message: Message)

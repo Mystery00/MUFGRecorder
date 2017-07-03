@@ -27,6 +27,7 @@ class EditMUFGActivity : AppCompatActivity()
 	private var fileUtil: FileUtil? = null
 	private var items: Array<String>? = null
 	private var checkedMap = HashMap<String, Boolean>()//选择的物品列表
+	private var checked: BooleanArray? = null
 	private var adapter: MUFGItemsAdapter? = null
 	private var mufg: MUFG? = null
 	private var menu: Menu? = null
@@ -42,9 +43,11 @@ class EditMUFGActivity : AppCompatActivity()
 		fileUtil = FileUtil(this)
 
 		items = resources.getStringArray(R.array.ingress_items)
-		for (temp in items!!)
+		checked = kotlin.BooleanArray(items!!.size)
+		for (i in items!!.indices)
 		{
-			checkedMap.put(temp, false)
+			checkedMap.put(items!![i], false)
+			checked!![i] = false
 		}
 
 		if (intent.getBundleExtra(INTENT_TAG) == null)
@@ -85,12 +88,31 @@ class EditMUFGActivity : AppCompatActivity()
 			recyclerView.layoutManager = LinearLayoutManager(this)
 			adapter = MUFGItemsAdapter(this, mufg!!.contentMap)
 			recyclerView.adapter = adapter
+			for (map in mufg!!.contentMap.keys)
+			{
+				for (i in items!!.indices)
+				{
+					if (map.contains(items!![i]))
+					{
+						checked!![i] = true
+						break
+					}
+				}
+				for (temp in checkedMap.keys)
+				{
+					if (map.contains(temp))
+					{
+						checkedMap.put(temp, true)
+						break
+					}
+				}
+			}
 		}
 
 		fab.setOnClickListener {
 			AlertDialog.Builder(this)
 					.setTitle(R.string.title_check_items_of_new_mufg)
-					.setMultiChoiceItems(items, null, { _, position, checked ->
+					.setMultiChoiceItems(items, checked, { _, position, checked ->
 						checkedMap[items!![position]] = checked
 					})
 					.setPositiveButton(android.R.string.ok, { _, _ ->
@@ -125,7 +147,7 @@ class EditMUFGActivity : AppCompatActivity()
 				{
 					mufg!!.contentMap = contentMap
 					fileUtil!!.saveObject(mufg!!, mufg!!.MUFGID, "MUFG")
-					Snackbar.make(coordinatorLayout,R.string.hint_mufg_saved,Snackbar.LENGTH_SHORT)
+					Snackbar.make(coordinatorLayout, R.string.hint_mufg_saved, Snackbar.LENGTH_SHORT)
 							.addCallback(object : Snackbar.Callback()
 							{
 								override fun onDismissed(transientBottomBar: Snackbar?, event: Int)

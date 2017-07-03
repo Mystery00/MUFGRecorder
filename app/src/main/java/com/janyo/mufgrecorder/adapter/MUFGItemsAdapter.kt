@@ -50,7 +50,7 @@ class MUFGItemsAdapter(context: Context,
 		holder.itemNumber.value = map["number"] as Int
 		if (map.containsKey("level"))
 		{
-			when (list[position]["type"])
+			when (map["type"])
 			{
 				1 ->
 				{

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="@string/key_set_notification_time"
+        android:title="@string/title_set_notification_time"/>
+
+</PreferenceScreen>

@@ -23,6 +23,10 @@
             android:name=".activity.EditMUFGActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/action_settings"
+            android:theme="@style/AppTheme.Preference"/>
     </application>
 
 </manifest>

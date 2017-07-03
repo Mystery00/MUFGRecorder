@@ -24,12 +24,13 @@ class EditMUFGActivity : AppCompatActivity()
 {
 	private val INTENT_TAG = "MUFG"
 	private var ingressUtil: IngressUtil? = null
-	private var fileUtil:FileUtil?=null
+	private var fileUtil: FileUtil? = null
 	private var items: Array<String>? = null
 	private var checkedMap = HashMap<String, Boolean>()//选择的物品列表
 	private var adapter: MUFGItemsAdapter? = null
 	private var mufg: MUFG? = null
 	private var menu: Menu? = null
+	private var isNew = true
 
 	override fun onCreate(savedInstanceState: Bundle?)
 	{
@@ -38,7 +39,7 @@ class EditMUFGActivity : AppCompatActivity()
 		setSupportActionBar(toolbar)
 
 		ingressUtil = IngressUtil(this)
-		fileUtil=FileUtil(this)
+		fileUtil = FileUtil(this)
 
 		if (intent.getBundleExtra(INTENT_TAG) == null)
 		{
@@ -72,6 +73,7 @@ class EditMUFGActivity : AppCompatActivity()
 		}
 		else
 		{
+			isNew = false
 			@Suppress("CAST_NEVER_SUCCEEDS")
 			mufg = intent.getBundleExtra(INTENT_TAG).getSerializable(INTENT_TAG) as MUFG
 			recyclerView.layoutManager = LinearLayoutManager(this)
@@ -106,6 +108,10 @@ class EditMUFGActivity : AppCompatActivity()
 	{
 		menuInflater.inflate(R.menu.menu_edit, menu)
 		this.menu = menu
+		if (!isNew)
+		{
+			menu.findItem(R.id.action_done).isVisible = true
+		}
 		return true
 	}
 
@@ -116,7 +122,7 @@ class EditMUFGActivity : AppCompatActivity()
 			R.id.action_done ->
 			{
 				mufg!!.contentMap = ingressUtil!!.ConvertItemsFormat(adapter!!.getList())
-				fileUtil!!.saveObject(mufg!!,mufg!!.MUFGID,"MUFG")
+				fileUtil!!.saveObject(mufg!!, mufg!!.MUFGID, "MUFG")
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)

@@ -47,7 +47,11 @@ class MainActivity : AppCompatActivity()
 	{
 		when (item.itemId)
 		{
-			R.id.action_settings -> return true
+			R.id.action_settings ->
+			{
+				startActivity(Intent(this, SettingsActivity::class.java))
+				return true
+			}
 			else -> return super.onOptionsItemSelected(item)
 		}
 	}

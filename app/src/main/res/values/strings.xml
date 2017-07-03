@@ -2,6 +2,7 @@
     <string name="app_name">MUFG Recorder</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_done">Done</string>
 
     <string name="mufg_pre_name">MUFG Capsule %1$s</string>
     <string name="mufg_space">%1$s/100</string>
@@ -11,6 +12,8 @@
     <string name="title_create_new_mufg">Create New MUFG</string>
     <string name="title_choose_level">Please choose the level of this thing</string>
 
+    <string name="title_set_notification_time">Set Notification Time</string>
+    <string name="summary_set_notification_time">Now set at %1$s</string>
+
     <string name="hint_id_invalid">The ID is invalid!</string>
-    <string name="action_done">Done</string>
 </resources>

@@ -9,22 +9,29 @@ import android.view.MenuItem
 import com.janyo.mufgrecorder.R
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.adapter.MUFGAdapter
+import com.janyo.mufgrecorder.util.FileUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity()
 {
+	private var fileUtil: FileUtil? = null
+
 	override fun onCreate(savedInstanceState: Bundle?)
 	{
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 		setSupportActionBar(toolbar)
 
+		fileUtil = FileUtil(this)
+
 		fab.setOnClickListener {
 			startActivity(Intent(this, EditMUFGActivity::class.java))
 		}
 
 		val list: ArrayList<MUFG> = ArrayList()
+		list.clear()
+		list.addAll(fileUtil!!.getObjects("MUFG"))
 
 		recyclerView.layoutManager = LinearLayoutManager(this)
 		recyclerView.adapter = MUFGAdapter(list, this)

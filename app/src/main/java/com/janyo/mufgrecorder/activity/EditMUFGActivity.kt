@@ -12,6 +12,7 @@ import android.view.MenuItem
 import com.janyo.mufgrecorder.R
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.adapter.MUFGItemsAdapter
+import com.janyo.mufgrecorder.util.FileUtil
 import com.janyo.mufgrecorder.util.IngressUtil
 
 import kotlinx.android.synthetic.main.activity_edit_mufg.*
@@ -23,6 +24,7 @@ class EditMUFGActivity : AppCompatActivity()
 {
 	private val INTENT_TAG = "MUFG"
 	private var ingressUtil: IngressUtil? = null
+	private var fileUtil:FileUtil?=null
 	private var items: Array<String>? = null
 	private var checkedMap = HashMap<String, Boolean>()//选择的物品列表
 	private var adapter: MUFGItemsAdapter? = null
@@ -36,6 +38,7 @@ class EditMUFGActivity : AppCompatActivity()
 		setSupportActionBar(toolbar)
 
 		ingressUtil = IngressUtil(this)
+		fileUtil=FileUtil(this)
 
 		if (intent.getBundleExtra(INTENT_TAG) == null)
 		{
@@ -113,6 +116,7 @@ class EditMUFGActivity : AppCompatActivity()
 			R.id.action_done ->
 			{
 				mufg!!.contentMap = ingressUtil!!.ConvertItemsFormat(adapter!!.getList())
+				fileUtil!!.saveObject(mufg!!,mufg!!.MUFGID,"MUFG")
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)

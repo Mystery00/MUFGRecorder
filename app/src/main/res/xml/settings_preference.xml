@@ -13,6 +13,14 @@
             android:key="@string/key_set_notification_time"
             android:title="@string/title_set_notification_time"/>
 
+        <RingtonePreference
+            android:key="@string/key_notification_ringtone"
+            android:title="@string/title_notification_ringtone"/>
+
+        <SwitchPreference
+            android:key="@string/key_notification_vibrate"
+            android:title="@string/title_notification_vibrate"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

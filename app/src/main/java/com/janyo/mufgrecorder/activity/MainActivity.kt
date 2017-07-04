@@ -12,6 +12,7 @@ import android.view.MenuItem
 import com.janyo.mufgrecorder.R
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.adapter.MUFGAdapter
+import com.janyo.mufgrecorder.util.CheckNotification
 import com.janyo.mufgrecorder.util.FileUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity()
 			R.id.action_settings ->
 			{
 				startActivity(Intent(this, SettingsActivity::class.java))
+				CheckNotification.notify(this, 1)
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)
@@ -88,7 +90,7 @@ class MainActivity : AppCompatActivity()
 }
 
 private class MyHandler(var adapter: MUFGAdapter,
-				var swipeRefreshLayout: SwipeRefreshLayout) : Handler()
+						var swipeRefreshLayout: SwipeRefreshLayout) : Handler()
 {
 	override fun handleMessage(message: Message)
 	{

@@ -37,6 +37,9 @@ class EditMUFGActivity : AppCompatActivity()
 		setContentView(R.layout.activity_edit_mufg)
 		setSupportActionBar(toolbar)
 
+		supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+		toolbar.setNavigationOnClickListener { finish() }
+
 		ingressUtil = IngressUtil(this)
 		fileUtil = FileUtil(this)
 

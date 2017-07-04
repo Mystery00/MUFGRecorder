@@ -1,8 +1,11 @@
 package com.janyo.mufgrecorder.util
 
 import android.content.Context
+import android.content.pm.PackageInfo
 import com.janyo.mufgrecorder.R
 import java.util.HashMap
+import android.content.pm.ApplicationInfo
+
 
 class IngressUtil(val context: Context)
 {
@@ -34,5 +37,16 @@ class IngressUtil(val context: Context)
 			list.add(map)
 		}
 		return list
+	}
+
+	fun getIngressPackageName(): String
+	{
+		val packageManager = context.packageManager
+		val packageInfoList: List<PackageInfo> = packageManager.getInstalledPackages(0)
+		val result = packageInfoList
+				.firstOrNull { it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM <= 0 && it.applicationInfo.packageName.contains(context.getString(R.string.ingressPackageName)) }
+				?.let { it.applicationInfo.packageName }
+				?: "null"
+		return result
 	}
 }

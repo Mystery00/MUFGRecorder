@@ -1,6 +1,7 @@
 package com.janyo.mufgrecorder.util
 
 import android.content.Context
+import android.net.Uri
 
 class Settings(context: Context)
 {
@@ -25,5 +26,25 @@ class Settings(context: Context)
 	fun getNotify(): Boolean
 	{
 		return sharedPreference.getBoolean("isNotify", false)
+	}
+
+	fun setNotificationRingtone(temp: String)
+	{
+		sharedPreference.edit().putString("notificationRingtone", temp).apply()
+	}
+
+	fun getNotificationRingtone(): String
+	{
+		return sharedPreference.getString("notificationRingtone", "")
+	}
+
+	fun setNotificationVibrate(temp: Boolean)
+	{
+		sharedPreference.edit().putBoolean("notificationVibrate", temp).apply()
+	}
+
+	fun getNotificationVibrate(): Boolean
+	{
+		return sharedPreference.getBoolean("notificationVibrate", true)
 	}
 }

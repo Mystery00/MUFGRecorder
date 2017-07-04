@@ -112,7 +112,6 @@ class MainActivity : AppCompatActivity()
 			R.id.action_settings ->
 			{
 				startActivity(Intent(this, SettingsActivity::class.java))
-				CheckNotification.notify(this, 1)
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)

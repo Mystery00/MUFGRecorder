@@ -45,7 +45,6 @@ object CheckNotification
 								context.packageManager.getLaunchIntentForPackage(ingressUtil.getIngressPackageName()),
 								PendingIntent.FLAG_UPDATE_CURRENT))
 				.setAutoCancel(false)
-
 		notify(context, builder.build())
 	}
 

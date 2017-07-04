@@ -44,8 +44,7 @@ class IngressUtil(val context: Context)
 		val packageManager = context.packageManager
 		val packageInfoList: List<PackageInfo> = packageManager.getInstalledPackages(0)
 		val result = packageInfoList
-				.firstOrNull { it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM <= 0 && it.applicationInfo.packageName.contains(context.getString(R.string.ingressPackageName)) }
-				?.let { it.applicationInfo.packageName }
+				.firstOrNull { it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM <= 0 && it.applicationInfo.packageName.contains(context.getString(R.string.ingressPackageName)) }?.applicationInfo?.packageName
 				?: "null"
 		return result
 	}

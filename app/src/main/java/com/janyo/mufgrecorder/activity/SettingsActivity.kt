@@ -1,6 +1,10 @@
 package com.janyo.mufgrecorder.activity
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
@@ -15,8 +19,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.janyo.mufgrecorder.R
+import com.janyo.mufgrecorder.service.CheckMUFGService
 import com.janyo.mufgrecorder.util.Settings
-import java.text.SimpleDateFormat
+import com.janyo.mufgrecorder.util.TimeUtil
 import java.util.*
 
 @Suppress("DEPRECATION")
@@ -55,7 +60,7 @@ class SettingsActivity : PreferenceActivity()
 		isNotify!!.isChecked = settings!!.getNotify()
 		if (settings!!.getNotify())
 		{
-			setNotificationTime!!.summary = String.format(getString(R.string.summary_set_notification_time), timeFormat(hour.toString() + ":" + minute.toString()))
+			setNotificationTime!!.summary = String.format(getString(R.string.summary_set_notification_time), TimeUtil.timeFormat(hour.toString() + ":" + minute.toString()))
 			notificationRingtone!!.summary = if (settings!!.getNotificationRingtone() == "null") null else RingtoneManager.getRingtone(this, Uri.parse(settings!!.getNotificationRingtone())).getTitle(this)
 			notificationRingtone!!.setDefaultValue(Uri.parse(settings!!.getNotificationRingtone()))
 			notificationVibrate!!.isChecked = settings!!.getNotificationVibrate()
@@ -134,39 +139,22 @@ class SettingsActivity : PreferenceActivity()
 			this.minute = minute
 			val setTime = hour.toString() + ":" + minute.toString()
 			settings!!.setNotificationTime(setTime)
-			setNotificationTime!!.summary = String.format(getString(R.string.summary_set_notification_time), timeFormat(setTime))
-			val time = calculateTime(setTime)
+			setNotificationTime!!.summary = String.format(getString(R.string.summary_set_notification_time), TimeUtil.timeFormat(setTime))
+			val time = TimeUtil.calculateTime(setTime)
 			Snackbar.make(coordinatorLayout!!, String.format(getString(R.string.hint_set_notification, time, if (time > 1) "s" else "")), Snackbar.LENGTH_SHORT)
 					.show()
+			setAlarm()
 		}, hour, minute, true)
 				.show()
 	}
 
-	private fun timeFormat(time: String): String
+	fun setAlarm()
 	{
-		var result = ""
-		val temp = time.split(":")
-		if (temp[0].length == 1)
-		{
-			result += "0"
-		}
-		result += temp[0] + ":"
-		if (temp[1].length == 1)
-		{
-			result += "0"
-		}
-		result += temp[1]
-		return result
-	}
-
-	private fun calculateTime(time: String): Float
-	{
-		val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
-		val calendar = Calendar.getInstance()
-		val date = calendar.get(Calendar.YEAR).toString() + "-" + (calendar.get(Calendar.MONTH) + 1).toString() + "-" + calendar.get(Calendar.DATE).toString() + " " + timeFormat(time) + ":00"
-		val setTime = dateFormat.parse(date)
-		val nowTime = calendar.time
-		val temp = (24 * 3600 - (nowTime.time - setTime.time) / 1000) % (24 * 3600)
-		return (temp.toFloat()) / 3600
+		val setTime = TimeUtil.getSetTime(TimeUtil.timeFormat(settings!!.getNotificationTime()))
+		val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+		val intent = Intent()
+		intent.setClass(this, CheckMUFGService::class.java)
+		val pendingIntent = PendingIntent.getService(this, 0, intent, 0)
+		alarmManager.set(AlarmManager.RTC_WAKEUP, setTime.time, pendingIntent)
 	}
 }

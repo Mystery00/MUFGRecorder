@@ -5,12 +5,13 @@ import android.content.pm.PackageInfo
 import com.janyo.mufgrecorder.R
 import java.util.HashMap
 import android.content.pm.ApplicationInfo
+import com.janyo.mufgrecorder.`class`.MUFG
 
 
 class IngressUtil(val context: Context)
 {
 	fun ConvertArrayToList(checked: BooleanArray,
-						   items: Array<String>): ArrayList<HashMap<String, Any>>
+						   items: Array<String>, mufg: MUFG): ArrayList<HashMap<String, Any>>
 	{
 		val item_level = context.resources.getStringArray(R.array.ingress_items_level_things)
 		val level = context.resources.getStringArray(R.array.ingress_level_things)
@@ -24,6 +25,14 @@ class IngressUtil(val context: Context)
 			val map = HashMap<String, Any>()
 			map.put("name", items[i])
 			map.put("number", 0)
+			for (temp in mufg.content)
+			{
+				if (temp["name"] == items[i])
+				{
+					map.put("number", temp["number"] as Int)
+					break
+				}
+			}
 			if (item_level.contains(items[i]))
 			{
 				map.put("type", 1)

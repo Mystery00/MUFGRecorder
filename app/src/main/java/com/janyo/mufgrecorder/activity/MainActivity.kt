@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
 import com.janyo.mufgrecorder.R
@@ -16,6 +18,8 @@ import com.janyo.mufgrecorder.util.CheckNotification
 import com.janyo.mufgrecorder.util.FileUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import android.support.v7.widget.RecyclerView
+
 
 class MainActivity : AppCompatActivity()
 {
@@ -49,6 +53,43 @@ class MainActivity : AppCompatActivity()
 				android.R.color.holo_orange_light,
 				android.R.color.holo_red_light)
 		swipeRefreshLayout.setOnRefreshListener { refresh() }
+
+		val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT)
+		{
+			override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+								target: RecyclerView.ViewHolder): Boolean
+			{
+				return false
+			}
+
+			override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int)
+			{
+				val position = viewHolder.adapterPosition
+				var i = 0
+				val mufg = list.removeAt(position)
+				adapter!!.notifyItemRemoved(position)
+				Snackbar.make(coordinatorLayout, R.string.hint_mufg_deleted, Snackbar.LENGTH_SHORT)
+						.setAction(R.string.action_redo, {
+							i++
+						})
+						.addCallback(object : Snackbar.Callback()
+						{
+							override fun onDismissed(transientBottomBar: Snackbar?, event: Int)
+							{
+								if (i == 0)
+								{
+									fileUtil!!.deleteMUFG(mufg, getString(R.string.mufg_dir))
+								}
+								else
+								{
+									refresh()
+								}
+							}
+						})
+						.show()
+			}
+		}
+		ItemTouchHelper(callback).attachToRecyclerView(recyclerView)
 	}
 
 	override fun onResume()
@@ -82,7 +123,7 @@ class MainActivity : AppCompatActivity()
 	{
 		Thread(Runnable {
 			list.clear()
-			list.addAll(fileUtil!!.getObjects("MUFG"))
+			list.addAll(fileUtil!!.getObjects(getString(R.string.mufg_dir)))
 			val message = Message()
 			message.what = 1
 			myHandler!!.sendMessage(message)

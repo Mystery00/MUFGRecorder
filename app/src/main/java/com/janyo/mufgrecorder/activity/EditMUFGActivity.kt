@@ -62,7 +62,7 @@ class EditMUFGActivity : AppCompatActivity()
 				mufg = MUFG(text_input.editText!!.text.toString())
 			})
 			builder.setOnDismissListener {
-				if (mufg == null)
+				if (mufg == null || !fileUtil!!.checkMUFGName(mufg!!.MUFGID, getString(R.string.mufg_dir)))
 				{
 					Snackbar.make(coordinatorLayout, R.string.hint_id_invalid, Snackbar.LENGTH_SHORT)
 							.addCallback(object : Snackbar.Callback()
@@ -104,7 +104,7 @@ class EditMUFGActivity : AppCompatActivity()
 					})
 					.setPositiveButton(android.R.string.ok, { _, _ ->
 						recyclerView.layoutManager = LinearLayoutManager(this)
-						adapter = MUFGItemsAdapter(ingressUtil!!.ConvertArrayToList(checked!!, items!!))
+						adapter = MUFGItemsAdapter(ingressUtil!!.ConvertArrayToList(checked!!, items!!, mufg!!))
 						recyclerView.adapter = adapter
 						menu!!.findItem(R.id.action_done).isVisible = true
 					})
@@ -132,7 +132,7 @@ class EditMUFGActivity : AppCompatActivity()
 				if (adapter!!.list.sumBy { it["number"] as Int } <= 100)
 				{
 					mufg!!.content = adapter!!.list
-					fileUtil!!.saveObject(mufg!!, mufg!!.MUFGID, "MUFG")
+					fileUtil!!.saveObject(mufg!!, mufg!!.MUFGID, getString(R.string.mufg_dir))
 					Snackbar.make(coordinatorLayout, R.string.hint_mufg_saved, Snackbar.LENGTH_SHORT)
 							.addCallback(object : Snackbar.Callback()
 							{
@@ -151,6 +151,41 @@ class EditMUFGActivity : AppCompatActivity()
 					Snackbar.make(coordinatorLayout, R.string.hint_out_of_number, Snackbar.LENGTH_SHORT)
 							.show()
 				}
+				return true
+			}
+			R.id.action_edit_title ->
+			{
+				val view = LayoutInflater.from(this).inflate(R.layout.text_input_layout, TextInputLayout(this), false)
+				val text_input: TextInputLayout = view.findViewById(R.id.text_input)
+				var newName = ""
+				text_input.hint = getString(R.string.title_set_mufg_id)
+				val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+				builder.setTitle(R.string.title_edit_mufg)
+				builder.setView(view)
+				builder.setPositiveButton(android.R.string.ok, { _, _ ->
+					newName = text_input.editText!!.text.toString()
+				})
+				builder.setOnDismissListener {
+					if (newName == "" || !fileUtil!!.checkMUFGName(newName, getString(R.string.mufg_dir)))
+					{
+						Snackbar.make(coordinatorLayout, R.string.hint_id_invalid, Snackbar.LENGTH_SHORT)
+								.show()
+					}
+					else
+					{
+						if (fileUtil!!.changeMUFGName(mufg, getString(R.string.mufg_dir), newName))
+						{
+							Snackbar.make(coordinatorLayout, String.format(getString(R.string.hint_mufg_renamed), newName), Snackbar.LENGTH_SHORT)
+									.show()
+						}
+						else
+						{
+							Snackbar.make(coordinatorLayout, R.string.hint_id_invalid, Snackbar.LENGTH_SHORT)
+									.show()
+						}
+					}
+				}
+				builder.show()
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)

@@ -5,13 +5,16 @@
     <string name="action_settings">Settings</string>
     <string name="action_done">Done</string>
     <string name="action_open_ingress">Open Ingress</string>
+    <string name="action_redo">Redo</string>
 
     <string name="mufg_pre_name">MUFG Capsule %1$s</string>
     <string name="mufg_space">%1$s/100</string>
+    <string name="mufg_dir">MUFG</string>
 
     <string name="title_set_mufg_id">Please Enter the ID of new MUFG</string>
     <string name="title_check_items_of_new_mufg">Please check the items</string>
     <string name="title_create_new_mufg">Create New MUFG</string>
+    <string name="title_edit_mufg">Edit MUFG</string>
     <string name="title_choose_level">Please choose the level of this thing</string>
 
     <string name="title_notification">Notification</string>
@@ -25,7 +28,10 @@
     <string name="hint_set_notification">I will notify you after %1$.1f hour%2$s</string>
     <string name="hint_out_of_number">The number of items cannot be more than 100! </string>
     <string name="hint_mufg_saved">This MUFG Capsule saved! </string>
+    <string name="hint_mufg_deleted">This MUFG Capsule deleted! </string>
+    <string name="hint_mufg_renamed">This MUFG Capsule renamed to %1$s! </string>
 
     <string name="notification_title">Please Check Your MUFG Capsule</string>
     <string name="notification_text">After</string>
+    <string name="action_edit">Edit</string>
 </resources>

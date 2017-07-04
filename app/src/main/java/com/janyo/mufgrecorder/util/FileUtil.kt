@@ -59,4 +59,38 @@ class FileUtil(var context: Context)
 		}
 		return list
 	}
+
+	fun deleteMUFG(mufg: MUFG, dirName: String)
+	{
+		val dir = File(context.filesDir.absolutePath + File.separator + dirName)
+		if (dir.exists() || dir.mkdirs())
+		{
+			val file = File(dir.absolutePath + File.separator + mufg.MUFGID)
+			file.delete()
+		}
+	}
+
+	fun checkMUFGName(mufgName: String, dirName: String): Boolean
+	{
+		val file = File(context.filesDir.absolutePath + File.separator + dirName + File.separator + mufgName)
+		return !file.exists()
+	}
+
+	fun changeMUFGName(mufg: MUFG?, dirName: String, newName: String): Boolean
+	{
+		var result = false
+		if (mufg == null)
+			return result
+		val dir = File(context.filesDir.absolutePath + File.separator + dirName)
+		if (dir.exists() || dir.mkdirs())
+		{
+			val file = File(dir.absolutePath + File.separator + mufg.MUFGID)
+			file.delete()
+			val newMUFG = MUFG(newName)
+			newMUFG.content = mufg.content
+			saveObject(newMUFG, newName, dirName)
+			result = true
+		}
+		return result
+	}
 }

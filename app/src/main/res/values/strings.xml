@@ -18,6 +18,7 @@
     <string name="title_set_notification_time">Set Notification Time</string>
     <string name="summary_set_notification_time">Now set at %1$s</string>
     <string name="title_notification_ringtone">Sound</string>
+    <string name="summary_notification_mute">Mute</string>
     <string name="title_notification_vibrate">Vibrate</string>
 
     <string name="hint_id_invalid">The ID is invalid!</string>

@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity()
 		setSupportActionBar(toolbar)
 
 		fileUtil = FileUtil(this)
+		CheckNotification.cancel(this)
 
 		fab.setOnClickListener {
 			startActivity(Intent(this, EditMUFGActivity::class.java))

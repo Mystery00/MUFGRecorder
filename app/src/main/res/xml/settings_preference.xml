@@ -15,6 +15,10 @@
 
         <RingtonePreference
             android:key="@string/key_notification_ringtone"
+            android:ringtoneType="notification"
+            android:defaultValue="true"
+            android:showDefault="true"
+            android:showSilent="true"
             android:title="@string/title_notification_ringtone"/>
 
         <SwitchPreference

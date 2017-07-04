@@ -16,14 +16,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.janyo.mufgrecorder.R
 import com.janyo.mufgrecorder.util.Settings
-import com.mystery0.tools.Logs.Logs
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("DEPRECATION")
 class SettingsActivity : PreferenceActivity()
 {
-	private val TAG = "SettingsActivity"
 	private var settings: Settings? = null
 	private var toolbar: Toolbar? = null
 	private var coordinatorLayout: View? = null
@@ -97,8 +95,8 @@ class SettingsActivity : PreferenceActivity()
 			false
 		}
 		notificationRingtone!!.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-			notificationRingtone!!.summary = RingtoneManager.getRingtone(this, Uri.parse(newValue.toString())).getTitle(this)
-			settings!!.setNotificationRingtone(newValue.toString())
+			notificationRingtone!!.summary = if (newValue == "") getString(R.string.summary_notification_mute) else RingtoneManager.getRingtone(this, Uri.parse(newValue.toString())).getTitle(this)
+			settings!!.setNotificationRingtone(if (newValue.toString() == "") "null" else newValue.toString())
 			false
 		}
 		notificationVibrate!!.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, _ ->

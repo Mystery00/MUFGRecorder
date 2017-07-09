@@ -1,5 +1,10 @@
 package com.janyo.mufgrecorder.util
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import com.janyo.mufgrecorder.service.CheckMUFGService
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,5 +41,18 @@ object TimeUtil
 		val nowTime = calendar.time
 		val temp = (24 * 3600 - (nowTime.time - getSetTime(time).time) / 1000) % (24 * 3600)
 		return (temp.toFloat()) / 3600
+	}
+
+	@JvmStatic fun setAlarm(context: Context,setTime:Date)
+	{
+		if (setTime.time < Calendar.getInstance().timeInMillis)
+		{
+			setTime.time += 24 * 3600 * 1000
+		}
+		val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+		val intent = Intent()
+		intent.setClass(context, CheckMUFGService::class.java)
+		val pendingIntent = PendingIntent.getService(context, 0, intent, 0)
+		alarmManager.set(AlarmManager.RTC_WAKEUP, setTime.time, pendingIntent)
 	}
 }

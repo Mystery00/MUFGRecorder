@@ -1,10 +1,6 @@
 package com.janyo.mufgrecorder.activity
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.app.TimePickerDialog
-import android.content.Context
-import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
@@ -19,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.janyo.mufgrecorder.R
-import com.janyo.mufgrecorder.service.CheckMUFGService
 import com.janyo.mufgrecorder.util.Settings
 import com.janyo.mufgrecorder.util.TimeUtil
 import java.util.*
@@ -143,18 +138,8 @@ class SettingsActivity : PreferenceActivity()
 			val time = TimeUtil.calculateTime(setTime)
 			Snackbar.make(coordinatorLayout!!, String.format(getString(R.string.hint_set_notification, time, if (time > 1) "s" else "")), Snackbar.LENGTH_SHORT)
 					.show()
-			setAlarm()
+			TimeUtil.setAlarm(this, TimeUtil.getSetTime(TimeUtil.timeFormat(settings!!.getNotificationTime())))
 		}, hour, minute, true)
 				.show()
-	}
-
-	fun setAlarm()
-	{
-		val setTime = TimeUtil.getSetTime(TimeUtil.timeFormat(settings!!.getNotificationTime()))
-		val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-		val intent = Intent()
-		intent.setClass(this, CheckMUFGService::class.java)
-		val pendingIntent = PendingIntent.getService(this, 0, intent, 0)
-		alarmManager.set(AlarmManager.RTC_WAKEUP, setTime.time, pendingIntent)
 	}
 }

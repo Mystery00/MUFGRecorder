@@ -18,6 +18,17 @@ class MUFGAdapter(var list: ArrayList<MUFG>,
 				  var context: Context) : RecyclerView.Adapter<MUFGAdapter.ViewHolder>()
 {
 	private val INTENT_TAG = "MUFG"
+	private var listener: OnClickListener? = null
+
+	interface OnClickListener
+	{
+		fun onClick(position: Int, mufg: MUFG)
+	}
+
+	fun setOnClickListener(listener: OnClickListener)
+	{
+		this.listener = listener
+	}
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int)
 	{
@@ -30,11 +41,18 @@ class MUFGAdapter(var list: ArrayList<MUFG>,
 		val space = mufg.content.sumBy { it["number"] as Int }
 		holder.mufgSpace.text = String.format(context.getString(R.string.mufg_space), space.toString())
 		holder.fullView.setOnClickListener {
-			val intent = Intent(context, EditMUFGActivity::class.java)
-			val bundle = Bundle()
-			bundle.putSerializable(INTENT_TAG, mufg)
-			intent.putExtra(INTENT_TAG, bundle)
-			context.startActivity(intent)
+			if (listener == null)
+			{
+				val intent = Intent(context, EditMUFGActivity::class.java)
+				val bundle = Bundle()
+				bundle.putSerializable(INTENT_TAG, mufg)
+				intent.putExtra(INTENT_TAG, bundle)
+				context.startActivity(intent)
+			}
+			else
+			{
+				listener!!.onClick(position, mufg)
+			}
 		}
 	}
 

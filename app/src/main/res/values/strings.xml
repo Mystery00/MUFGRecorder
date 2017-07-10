@@ -6,6 +6,7 @@
     <string name="action_done">Done</string>
     <string name="action_open_ingress">Open Ingress</string>
     <string name="action_redo">Redo</string>
+    <string name="action_edit">Edit</string>
 
     <string name="mufg_pre_name">MUFG Capsule %1$s</string>
     <string name="mufg_space">%1$s/100</string>
@@ -33,5 +34,7 @@
 
     <string name="notification_title">Please Check Your MUFG Capsule</string>
     <string name="notification_text">After</string>
-    <string name="action_edit">Edit</string>
+
+    <string name="title_activity_update">Update Items</string>
+    <string name="action_update">Update</string>
 </resources>

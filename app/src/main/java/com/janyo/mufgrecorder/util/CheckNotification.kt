@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat
 
 import com.janyo.mufgrecorder.R
 import com.janyo.mufgrecorder.activity.MainActivity
+import com.janyo.mufgrecorder.activity.UpdateActivity
 
 object CheckNotification
 {
@@ -34,17 +35,20 @@ object CheckNotification
 						PendingIntent.getActivity(
 								context,
 								0,
-								Intent(context, MainActivity::class.java),
-								PendingIntent.FLAG_UPDATE_CURRENT))
-				.addAction(
-						R.drawable.ic_arrow_forward,
-						res.getString(R.string.action_open_ingress),
-						PendingIntent.getActivity(
-								context,
-								0,
-								context.packageManager.getLaunchIntentForPackage(ingressUtil.getIngressPackageName()),
+								Intent(context, UpdateActivity::class.java),
 								PendingIntent.FLAG_UPDATE_CURRENT))
 				.setAutoCancel(false)
+		if (ingressUtil.getIngressPackageName() != "null")
+		{
+			builder.addAction(
+					R.drawable.ic_arrow_forward,
+					res.getString(R.string.action_open_ingress),
+					PendingIntent.getActivity(
+							context,
+							0,
+							context.packageManager.getLaunchIntentForPackage(ingressUtil.getIngressPackageName()),
+							PendingIntent.FLAG_UPDATE_CURRENT))
+		}
 		notify(context, builder.build())
 	}
 

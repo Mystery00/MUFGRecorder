@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp">
+    android:layout_height="@dimen/item_mufg_things_height">
 
     <TextView
         android:id="@+id/itemName"
@@ -36,7 +36,7 @@
     <NumberPicker
         android:id="@+id/itemNumber"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/item_mufg_things_number_height"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"/>
 

@@ -7,6 +7,7 @@
     <string name="action_open_ingress">Open Ingress</string>
     <string name="action_redo">Redo</string>
     <string name="action_edit">Edit</string>
+    <string name="action_update">Update</string>
 
     <string name="mufg_pre_name">MUFG Capsule %1$s</string>
     <string name="mufg_space">%1$s/100</string>
@@ -17,6 +18,7 @@
     <string name="title_create_new_mufg">Create New MUFG</string>
     <string name="title_edit_mufg">Edit MUFG</string>
     <string name="title_choose_level">Please choose the level of this thing</string>
+    <string name="title_update_items_number">Update items</string>
 
     <string name="title_notification">Notification</string>
     <string name="title_set_notification_time">Set Notification Time</string>
@@ -36,5 +38,4 @@
     <string name="notification_text">After</string>
 
     <string name="title_activity_update">Update Items</string>
-    <string name="action_update">Update</string>
 </resources>

@@ -57,4 +57,12 @@ class IngressUtil(val context: Context)
 				?: "null"
 		return result
 	}
+
+	@Suppress("UNCHECKED_CAST")
+	fun cloneList(list: ArrayList<HashMap<String, Any>>): ArrayList<HashMap<String, Any>>
+	{
+		val resultList = ArrayList<HashMap<String, Any>>()
+		list.mapTo(resultList) { it.clone() as HashMap<String, Any> }
+		return resultList
+	}
 }

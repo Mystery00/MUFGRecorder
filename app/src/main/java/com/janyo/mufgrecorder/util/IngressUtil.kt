@@ -65,4 +65,18 @@ class IngressUtil(val context: Context)
 		list.mapTo(resultList) { it.clone() as HashMap<String, Any> }
 		return resultList
 	}
+
+	fun compareList(oldList: ArrayList<HashMap<String, Any>>,newList: ArrayList<HashMap<String, Any>>)
+	{
+		for (map in oldList)
+		{
+			for (newMap in newList)
+			{
+				if (map["name"]==newMap["name"])
+				{
+
+				}
+			}
+		}
+	}
 }

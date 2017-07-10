@@ -43,7 +43,7 @@ object TimeUtil
 		return (temp.toFloat()) / 3600
 	}
 
-	@JvmStatic fun setAlarm(context: Context,setTime:Date)
+	@JvmStatic fun setAlarm(context: Context, setTime: Date)
 	{
 		if (setTime.time < Calendar.getInstance().timeInMillis)
 		{
@@ -53,6 +53,6 @@ object TimeUtil
 		val intent = Intent()
 		intent.setClass(context, CheckMUFGService::class.java)
 		val pendingIntent = PendingIntent.getService(context, 0, intent, 0)
-		alarmManager.set(AlarmManager.RTC_WAKEUP, setTime.time, pendingIntent)
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, setTime.time, 24 * 3600 * 1000, pendingIntent)
 	}
 }

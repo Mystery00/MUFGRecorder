@@ -44,6 +44,7 @@ class MUFGItemsUpdateAdapter(
 					holder.level.visibility = View.GONE
 					holder.itemLevel.visibility = View.VISIBLE
 					holder.itemLevel.setSelection(map["level"] as Int)
+					holder.itemLevel.isClickable = false
 					holder.itemLevel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
 					{
 						override fun onItemSelected(parent: AdapterView<*>, view: View,
@@ -62,6 +63,7 @@ class MUFGItemsUpdateAdapter(
 					holder.itemLevel.visibility = View.GONE
 					holder.level.visibility = View.VISIBLE
 					holder.level.setSelection(map["level"] as Int)
+					holder.level.isClickable = false
 					holder.level.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
 					{
 						override fun onItemSelected(parent: AdapterView<*>, view: View,

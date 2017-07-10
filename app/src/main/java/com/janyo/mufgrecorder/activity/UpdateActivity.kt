@@ -49,6 +49,7 @@ class UpdateActivity : AppCompatActivity()
 				val oldList = ingressUtil!!.cloneList(mufg.content)
 				val adapter = MUFGItemsUpdateAdapter(mufg.content)
 				val recyclerView = RecyclerView(this@UpdateActivity)
+				recyclerView.setPadding(50, 20, 50, 0)
 				recyclerView.layoutManager = LinearLayoutManager(this@UpdateActivity)
 				recyclerView.adapter = adapter
 				AlertDialog.Builder(this@UpdateActivity)

@@ -6,14 +6,11 @@ import com.janyo.mufgrecorder.R
 import android.content.pm.ApplicationInfo
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.`class`.UpdateItems
-import com.mystery0.tools.Logs.Logs
 import java.util.*
 
 
 class IngressUtil(val context: Context)
 {
-	private val TAG = "IngressUtil"
-
 	fun ConvertArrayToList(checked: BooleanArray,
 						   items: Array<String>, mufg: MUFG): ArrayList<HashMap<String, Any>>
 	{
@@ -76,90 +73,86 @@ class IngressUtil(val context: Context)
 		val updateItems = UpdateItems(updateTime, mufgName)
 		for (map in oldList)
 		{
-			for (newMap in newList)
-			{
-				if (map["name"] == newMap["name"])
-				{
-					Logs.i(TAG, "compareList: " + map)
-					Logs.i(TAG, "compareList: " + newMap)
-					val number = newMap["number"] as Int - map["number"] as Int
-					when (map["name"])
-					{
-						"media" ->
+			newList
+					.filter { map["name"] == it["name"] }
+					.map { it["number"] as Int - map["number"] as Int }
+					.forEach {
+						when (map["name"])
 						{
-							updateItems.Media = number
-						}
-						"Portal Shield" ->
-						{
-							compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, number, "PortalShield")
-						}
-						"AXA Shield" ->
-						{
-							updateItems.AXAShield = number
-						}
-						"Link Amp" ->
-						{
-							compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, number, "LinkAmp")
-						}
-						"SoftBank" ->
-						{
-							updateItems.SoftBank = number
-						}
-						"Heat Sink" ->
-						{
-							compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, number, "HeatSink")
-						}
-						"Multi-hack" ->
-						{
-							compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, number, "Multihack")
-						}
-						"Force Amp" ->
-						{
-							updateItems.ForceAmp = number
-						}
-						"Turret" ->
-						{
-							updateItems.Turret = number
-						}
-						"Portal Key" ->
-						{
-							updateItems.PortalKey = number
-						}
-						"Power Cube" ->
-						{
-							compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, number, "PowerCube")
-						}
-						"Resonator" ->
-						{
-							compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, number, "Resonator")
-						}
-						"Xmp Burster" ->
-						{
-							compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, number, "XmpBurster")
-						}
-						"Ultra Strike" ->
-						{
-							compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, number, "UltraStrike")
-						}
-						"Jarvis Virus" ->
-						{
-							updateItems.JarvisVirus = number
-						}
-						"ADA Refactor" ->
-						{
-							updateItems.ADARefactor = number
-						}
-						"Lawson Power Cube" ->
-						{
-							updateItems.LawsonPowerCube = number
-						}
-						"Circle-K Power Cube" ->
-						{
-							updateItems.CircleKPowerCube = number
+							"media" ->
+							{
+								updateItems.Media = it
+							}
+							"Portal Shield" ->
+							{
+								compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, it, "PortalShield")
+							}
+							"AXA Shield" ->
+							{
+								updateItems.AXAShield = it
+							}
+							"Link Amp" ->
+							{
+								compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, it, "LinkAmp")
+							}
+							"SoftBank" ->
+							{
+								updateItems.SoftBank = it
+							}
+							"Heat Sink" ->
+							{
+								compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, it, "HeatSink")
+							}
+							"Multi-hack" ->
+							{
+								compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, it, "Multihack")
+							}
+							"Force Amp" ->
+							{
+								updateItems.ForceAmp = it
+							}
+							"Turret" ->
+							{
+								updateItems.Turret = it
+							}
+							"Portal Key" ->
+							{
+								updateItems.PortalKey = it
+							}
+							"Power Cube" ->
+							{
+								compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, it, "PowerCube")
+							}
+							"Resonator" ->
+							{
+								compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, it, "Resonator")
+							}
+							"Xmp Burster" ->
+							{
+								compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, it, "XmpBurster")
+							}
+							"Ultra Strike" ->
+							{
+								compareItemLevel(map["type"] as Int, map["level"] as Int, updateItems, it, "UltraStrike")
+							}
+							"Jarvis Virus" ->
+							{
+								updateItems.JarvisVirus = it
+							}
+							"ADA Refactor" ->
+							{
+								updateItems.ADARefactor = it
+							}
+							"Lawson Power Cube" ->
+							{
+								updateItems.LawsonPowerCube = it
+							}
+							"Circle-K Power Cube" ->
+							{
+								updateItems.CircleKPowerCube = it
+							}
 						}
 					}
-				}
-			}
 		}
 		return updateItems
 	}

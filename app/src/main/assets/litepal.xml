@@ -5,4 +5,5 @@
     <list>
         <mapping class="com.janyo.mufgrecorder.class.UpdateItems"/>
     </list>
+    <storage value="external" />
 </litepal>

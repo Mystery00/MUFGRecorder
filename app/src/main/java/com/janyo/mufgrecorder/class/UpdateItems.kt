@@ -2,8 +2,11 @@ package com.janyo.mufgrecorder.`class`
 
 import org.litepal.crud.DataSupport
 
-class UpdateItems(var updateTime: String, var mufgName: String) : DataSupport()
+class UpdateItems() : DataSupport()
 {
+	var updateTime: String = ""
+	var mufgName: String = ""
+
 	var Common_PortalShield = 0
 	var Rare_PortalShield = 0
 	var VeryRare_PortalShield = 0
@@ -66,4 +69,15 @@ class UpdateItems(var updateTime: String, var mufgName: String) : DataSupport()
 	var ADARefactor = 0
 	var LawsonPowerCube = 0
 	var CircleKPowerCube = 0
+
+	constructor(mufgName: String) : this()
+	{
+		this.mufgName = mufgName
+	}
+
+	constructor(updateTime: String, mufgName: String) : this()
+	{
+		this.updateTime = updateTime
+		this.mufgName = mufgName
+	}
 }

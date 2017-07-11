@@ -2,6 +2,7 @@ package com.janyo.mufgrecorder.util
 
 import android.content.Context
 import com.janyo.mufgrecorder.`class`.MUFG
+import com.janyo.mufgrecorder.`class`.UpdateItems
 import java.io.*
 
 class FileUtil(var context: Context)
@@ -84,6 +85,9 @@ class FileUtil(var context: Context)
 		val dir = File(context.filesDir.absolutePath + File.separator + dirName)
 		if (dir.exists() || dir.mkdirs())
 		{
+			val updateItems = UpdateItems(newName)
+			updateItems.updateAll("mufgName = ?", mufg.MUFGID)
+
 			val file = File(dir.absolutePath + File.separator + mufg.MUFGID)
 			file.delete()
 			val newMUFG = MUFG(newName)

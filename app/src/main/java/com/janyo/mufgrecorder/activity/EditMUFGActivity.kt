@@ -153,6 +153,10 @@ class EditMUFGActivity : AppCompatActivity()
 				}
 				return true
 			}
+			R.id.action_history ->
+			{
+				return true
+			}
 			R.id.action_edit_title ->
 			{
 				val view = LayoutInflater.from(this).inflate(R.layout.text_input_layout, TextInputLayout(this), false)
@@ -192,5 +196,4 @@ class EditMUFGActivity : AppCompatActivity()
 			else -> return super.onOptionsItemSelected(item)
 		}
 	}
-
 }

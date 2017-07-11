@@ -14,7 +14,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class MUFGItemsUpdateAdapter(
-		var list: ArrayList<HashMap<String, Any>>) : RecyclerView.Adapter<MUFGItemsUpdateAdapter.ViewHolder>()
+		private var list: ArrayList<HashMap<String, Any>>) : RecyclerView.Adapter<MUFGItemsUpdateAdapter.ViewHolder>()
 {
 	override fun getItemCount(): Int
 	{

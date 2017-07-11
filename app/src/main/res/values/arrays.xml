@@ -29,9 +29,6 @@
         <item>Ultra Strike</item><!--level-->
         <item>Jarvis Virus</item>
         <item>ADA Refactor</item>
-    </string-array>
-    <string-array name="Power_Cube">
-        <item>Power Cube</item>
         <item>Lawson Power Cube</item>
         <item>Circle-K Power Cube</item>
     </string-array>

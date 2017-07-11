@@ -56,7 +56,7 @@ class SettingsActivity : PreferenceActivity()
 		if (settings!!.getNotify())
 		{
 			setNotificationTime!!.summary = String.format(getString(R.string.summary_set_notification_time), TimeUtil.timeFormat(hour.toString() + ":" + minute.toString()))
-			notificationRingtone!!.summary = if (settings!!.getNotificationRingtone() == "null") null else RingtoneManager.getRingtone(this, Uri.parse(settings!!.getNotificationRingtone())).getTitle(this)
+			notificationRingtone!!.summary = if (settings!!.getNotificationRingtone() == "null") "Mute" else RingtoneManager.getRingtone(this, Uri.parse(settings!!.getNotificationRingtone())).getTitle(this)
 			notificationRingtone!!.setDefaultValue(Uri.parse(settings!!.getNotificationRingtone()))
 			notificationVibrate!!.isChecked = settings!!.getNotificationVibrate()
 		}

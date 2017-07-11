@@ -114,6 +114,11 @@ class MainActivity : AppCompatActivity()
 				startActivity(Intent(this, SettingsActivity::class.java))
 				return true
 			}
+			R.id.action_update ->
+			{
+				startActivity(Intent(this, UpdateActivity::class.java))
+				return true
+			}
 			else -> return super.onOptionsItemSelected(item)
 		}
 	}

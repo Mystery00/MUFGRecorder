@@ -157,6 +157,7 @@ class EditMUFGActivity : AppCompatActivity()
 			{
 				val view = LayoutInflater.from(this).inflate(R.layout.text_input_layout, TextInputLayout(this), false)
 				val text_input: TextInputLayout = view.findViewById(R.id.text_input)
+				text_input.editText!!.setText(mufg!!.MUFGID)
 				var newName = ""
 				text_input.hint = getString(R.string.title_set_mufg_id)
 				val builder: AlertDialog.Builder = AlertDialog.Builder(this)

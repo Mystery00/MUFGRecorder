@@ -8,6 +8,7 @@
     <string name="action_redo">Redo</string>
     <string name="action_edit">Edit</string>
     <string name="action_update">Update</string>
+    <string name="action_history">History</string>
 
     <string name="mufg_pre_name">MUFG Capsule %1$s</string>
     <string name="mufg_space">%1$s/100</string>
@@ -33,10 +34,10 @@
     <string name="hint_mufg_saved">This MUFG Capsule saved! </string>
     <string name="hint_mufg_deleted">This MUFG Capsule deleted! </string>
     <string name="hint_mufg_renamed">This MUFG Capsule renamed to %1$s! </string>
+    <string name="hint_history_title">Up to now, this MUFG Capsule produced the following things:</string>
 
     <string name="notification_title">Please Check Your MUFG Capsule</string>
     <string name="notification_text">After</string>
 
     <string name="title_activity_update">Update Items</string>
-    <string name="action_history">History</string>
 </resources>

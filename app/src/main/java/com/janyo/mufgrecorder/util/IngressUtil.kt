@@ -187,8 +187,52 @@ class IngressUtil(val context: Context)
 	{
 		var result = ""
 		val updates = DataSupport.where("mufgName=?", mufgName).find(UpdateItems::class.java)
-
+		updates.forEach { result += convertThingsToString(it) + "\n" }
 		Logs.i(TAG, "getInfoFromMUFG: ")
+		return result
+	}
+
+	fun convertThingsToString(updateItems: UpdateItems): String
+	{
+		var result = "This MUFG Capsule produced:\n"
+		for ((index, field) in updateItems.javaClass.declaredFields.withIndex())
+		{
+			if (field.genericType.toString() != "int")
+			{
+				continue
+			}
+			val fieldNum = updateItems.javaClass.getMethod("get" + field.name).invoke(updateItems) as Int
+			if (fieldNum == 0)
+			{
+				continue
+			}
+			val items = field.name.split("_")
+			if (items.size != 2)
+			{
+				result += "    " + fieldNum + " " + items[0]
+				if (fieldNum > 1)
+					result += "s"
+			}
+			else
+			{
+				val items_level = arrayOf("Common", "Rare", "VeryRare")
+				val level = arrayOf("1", "2", "3", "4", "5", "6", "7", "8")
+				if (items_level.contains(items[1]))
+				{
+					result += "    " + fieldNum + " " + items[1] + " " + items[0]
+					if (fieldNum > 1)
+						result += "s"
+				}
+				else if (level.contains(items[1]))
+				{
+					result += "    " + fieldNum + " LV" + items[1] + " " + items[0]
+					if (fieldNum > 1)
+						result += "s"
+				}
+			}
+			result += "\n"
+		}
+		result += "  at " + updateItems.updateTime
 		return result
 	}
 }

@@ -37,7 +37,7 @@ object CheckNotification
 								0,
 								Intent(context, UpdateActivity::class.java),
 								PendingIntent.FLAG_UPDATE_CURRENT))
-				.setAutoCancel(false)
+				.setAutoCancel(true)
 		if (ingressUtil.getIngressPackageName() != "null")
 		{
 			builder.addAction(

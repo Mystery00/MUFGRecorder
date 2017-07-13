@@ -7,21 +7,21 @@ class UpdateItems() : DataSupport()
 	var updateTime: String = ""
 	var mufgName: String = ""
 
-	var Common_PortalShield = 0
-	var Rare_PortalShield = 0
-	var VeryRare_PortalShield = 0
+	var PortalShield_Common= 0
+	var PortalShield_Rare = 0
+	var PortalShield_VeryRare= 0
 
-	var Common_LinkAmp = 0
-	var Rare_LinkAmp = 0
-	var VeryRare_LinkAmp = 0
+	var LinkAmp_Common = 0
+	var LinkAmp_Rare = 0
+	var LinkAmp_VeryRare = 0
 
-	var Common_HeatSink = 0
-	var Rare_HeatSink = 0
-	var VeryRare_HeatSink = 0
+	var HeatSink_Common = 0
+	var HeatSink_Rare = 0
+	var HeatSink_VeryRare = 0
 
-	var Common_Multihack = 0
-	var Rare_Multihack = 0
-	var VeryRare_Multihack = 0
+	var Multihack_Common = 0
+	var Multihack_Rare = 0
+	var Multihack_VeryRare = 0
 
 	var PowerCube_1 = 0
 	var PowerCube_2 = 0

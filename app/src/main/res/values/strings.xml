@@ -40,4 +40,5 @@
     <string name="notification_text">After</string>
 
     <string name="title_activity_update">Update Items</string>
+    <string name="title_show_history">History</string>
 </resources>

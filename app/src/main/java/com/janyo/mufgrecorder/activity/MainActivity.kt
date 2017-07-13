@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity()
 	private var fileUtil: FileUtil? = null
 	private var adapter: MUFGAdapter? = null
 	private val list: ArrayList<MUFG> = ArrayList()
+	private var oneClickTime: Long = 0
 
 	private var myHandler: MyHandler? = null
 
@@ -97,6 +98,21 @@ class MainActivity : AppCompatActivity()
 		super.onResume()
 		swipeRefreshLayout.isRefreshing = true
 		refresh()
+	}
+
+	override fun onBackPressed()
+	{
+		val doubleClickTime = System.currentTimeMillis()
+		if (doubleClickTime - oneClickTime > 2000)
+		{
+			Snackbar.make(coordinatorLayout, R.string.hint_exit_to_app, Snackbar.LENGTH_SHORT)
+					.show()
+			oneClickTime = doubleClickTime
+		}
+		else
+		{
+			finish()
+		}
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean

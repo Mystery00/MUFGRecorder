@@ -113,6 +113,8 @@ class UpdateActivity : AppCompatActivity()
 			{
 				CheckNotification.cancel(this)
 				updateList.forEach { it.save() }
+				list.forEach { fileUtil!!.saveObject(it,it.MUFGID,"MUFG") }
+				finish()
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)

@@ -35,6 +35,7 @@
     <string name="hint_mufg_deleted">This MUFG Capsule deleted! </string>
     <string name="hint_mufg_renamed">This MUFG Capsule renamed to %1$s! </string>
     <string name="hint_history_title">Up to now, this MUFG Capsule produced the following things:</string>
+    <string name="hint_exit_to_app">Press twice to exit!</string>
 
     <string name="notification_title">Please Check Your MUFG Capsule</string>
     <string name="notification_text">After</string>

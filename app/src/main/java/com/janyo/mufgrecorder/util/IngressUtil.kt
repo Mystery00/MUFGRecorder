@@ -6,14 +6,11 @@ import com.janyo.mufgrecorder.R
 import android.content.pm.ApplicationInfo
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.`class`.UpdateItems
-import com.mystery0.tools.Logs.Logs
 import org.litepal.crud.DataSupport
 import java.util.*
 
-
 class IngressUtil(val context: Context)
 {
-	private val TAG = "IngressUtil"
 	fun ConvertArrayToList(checked: BooleanArray,
 						   items: Array<String>, mufg: MUFG): ArrayList<HashMap<String, Any>>
 	{
@@ -188,14 +185,13 @@ class IngressUtil(val context: Context)
 		var result = ""
 		val updates = DataSupport.where("mufgName=?", mufgName).find(UpdateItems::class.java)
 		updates.forEach { result += convertThingsToString(it) + "\n" }
-		Logs.i(TAG, "getInfoFromMUFG: ")
 		return result
 	}
 
 	fun convertThingsToString(updateItems: UpdateItems): String
 	{
 		var result = "This MUFG Capsule produced:\n"
-		for ((index, field) in updateItems.javaClass.declaredFields.withIndex())
+		for (field in updateItems.javaClass.declaredFields)
 		{
 			if (field.genericType.toString() != "int")
 			{

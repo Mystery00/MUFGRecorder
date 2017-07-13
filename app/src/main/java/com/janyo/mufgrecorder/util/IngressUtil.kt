@@ -6,11 +6,14 @@ import com.janyo.mufgrecorder.R
 import android.content.pm.ApplicationInfo
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.`class`.UpdateItems
+import com.mystery0.tools.Logs.Logs
+import org.litepal.crud.DataSupport
 import java.util.*
 
 
 class IngressUtil(val context: Context)
 {
+	private val TAG = "IngressUtil"
 	fun ConvertArrayToList(checked: BooleanArray,
 						   items: Array<String>, mufg: MUFG): ArrayList<HashMap<String, Any>>
 	{
@@ -178,5 +181,14 @@ class IngressUtil(val context: Context)
 				.filter { it.name.toLowerCase().contains(itemLevel.toLowerCase()) }
 				.filter { it.name.contains(itemName) }
 				.forEach { it.invoke(objects, number) }
+	}
+
+	fun getInfoFromMUFG(mufgName: String): String
+	{
+		var result = ""
+		val updates = DataSupport.where("mufgName=?", mufgName).find(UpdateItems::class.java)
+
+		Logs.i(TAG, "getInfoFromMUFG: ")
+		return result
 	}
 }

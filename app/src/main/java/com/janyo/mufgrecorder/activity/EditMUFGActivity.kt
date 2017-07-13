@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.janyo.mufgrecorder.R
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.adapter.MUFGItemsAdapter
@@ -155,6 +157,13 @@ class EditMUFGActivity : AppCompatActivity()
 			}
 			R.id.action_history ->
 			{
+				val view = LayoutInflater.from(this).inflate(R.layout.dialog_show_history, LinearLayout(this), false)
+				val text_info: TextView = view.findViewById(R.id.mufg_info)
+				text_info.text = ingressUtil!!.getInfoFromMUFG(mufg!!.MUFGID)
+				AlertDialog.Builder(this)
+						.setView(view)
+						.setPositiveButton(android.R.string.ok, null)
+						.show()
 				return true
 			}
 			R.id.action_edit_title ->

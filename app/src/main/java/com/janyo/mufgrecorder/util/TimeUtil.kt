@@ -53,6 +53,6 @@ object TimeUtil
 		val intent = Intent()
 		intent.setClass(context, CheckMUFGService::class.java)
 		val pendingIntent = PendingIntent.getService(context, 0, intent, 0)
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, setTime.time, 24 * 3600 * 1000, pendingIntent)
+		alarmManager.set(AlarmManager.RTC_WAKEUP, setTime.time, pendingIntent)
 	}
 }

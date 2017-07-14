@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="ingress_items_level_things">
+    <string-array name="ingress_items_level_things" translatable="false">
         <item>Portal Shield</item><!--item level-->
         <item>Link Amp</item><!--item level-->
         <item>Heat Sink</item><!--item level-->
         <item>Multi-hack</item><!--item level-->
     </string-array>
-    <string-array name="ingress_level_things">
+    <string-array name="ingress_level_things" translatable="false">
         <item>Power Cube</item><!--level-->
         <item>Resonator</item><!--level-->
         <item>Xmp Burster</item><!--level-->
         <item>Ultra Strike</item><!--level-->
     </string-array>
-    <string-array name="ingress_items">
+    <string-array name="ingress_items" translatable="false">
         <item>media</item>
         <item>Portal Shield</item><!--item level-->
         <item>AXA Shield</item>
@@ -32,12 +32,12 @@
         <item>Lawson Power Cube</item>
         <item>Circle-K Power Cube</item>
     </string-array>
-    <string-array name="ingress_item_level">
+    <string-array name="ingress_item_level" translatable="false">
         <item>common</item>
         <item>Rare</item>
         <item>Very Rare</item>
     </string-array>
-    <string-array name="ingress_level">
+    <string-array name="ingress_level" translatable="false">
         <item>LV1</item>
         <item>LV2</item>
         <item>LV3</item>

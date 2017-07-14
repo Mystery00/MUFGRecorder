@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.nillith.autoversion'
+
+autoVersion {
+    major 1
+    minor 0
+    patch 0
+}
 
 android {
     compileSdkVersion 26
@@ -9,8 +16,8 @@ android {
         applicationId "com.janyo.mufgrecorder"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode autoVersion.code
+        versionName autoVersion.name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

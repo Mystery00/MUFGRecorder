@@ -38,7 +38,7 @@
     <string name="hint_exit_to_app">Press twice to exit!</string>
 
     <string name="notification_title">Please Check Your MUFG Capsule</string>
-    <string name="notification_text">After</string>
+    <string name="notification_text">After check the MUFG Capsule, please enter this notification to update items! </string>
 
     <string name="title_activity_update">Update Items</string>
     <string name="title_show_history">History</string>

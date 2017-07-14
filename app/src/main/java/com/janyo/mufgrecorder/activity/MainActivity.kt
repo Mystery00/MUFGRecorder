@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Message
 import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -19,6 +20,9 @@ import com.janyo.mufgrecorder.util.FileUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.widget.LinearLayout
+import com.janyo.mufgrecorder.util.Settings
 
 
 class MainActivity : AppCompatActivity()
@@ -35,6 +39,17 @@ class MainActivity : AppCompatActivity()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 		setSupportActionBar(toolbar)
+
+		val settings = Settings(this)
+		if (settings.isFirstRun())
+		{
+			AlertDialog.Builder(this)
+					.setTitle(R.string.action_how_to_use)
+					.setView(LayoutInflater.from(this).inflate(R.layout.dialog_help, LinearLayout(this), false))
+					.setPositiveButton(android.R.string.ok, null)
+					.setOnDismissListener { settings.setFirstRun(false) }
+					.show()
+		}
 
 		fileUtil = FileUtil(this)
 		CheckNotification.cancel(this)
@@ -128,12 +143,20 @@ class MainActivity : AppCompatActivity()
 			R.id.action_settings ->
 			{
 				startActivity(Intent(this, SettingsActivity::class.java))
-				CheckNotification.notify(this,0)
 				return true
 			}
 			R.id.action_update ->
 			{
 				startActivity(Intent(this, UpdateActivity::class.java))
+				return true
+			}
+			R.id.action_help ->
+			{
+				AlertDialog.Builder(this)
+						.setTitle(R.string.action_how_to_use)
+						.setView(LayoutInflater.from(this).inflate(R.layout.dialog_help, LinearLayout(this), false))
+						.setPositiveButton(android.R.string.ok, null)
+						.show()
 				return true
 			}
 			else -> return super.onOptionsItemSelected(item)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="key_notification">key_notification</string>
-    <string name="key_set_notification_time">key_set_notification_time</string>
-    <string name="key_notification_ringtone">key_notification_ringtone</string>
-    <string name="key_notification_vibrate">key_notification_vibrate</string>
+    <string name="key_notification" translatable="false">key_notification</string>
+    <string name="key_set_notification_time" translatable="false">key_set_notification_time</string>
+    <string name="key_notification_ringtone" translatable="false">key_notification_ringtone</string>
+    <string name="key_notification_vibrate" translatable="false">key_notification_vibrate</string>
 </resources>

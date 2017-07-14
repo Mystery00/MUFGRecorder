@@ -11,4 +11,9 @@
         android:id="@+id/action_update"
         android:title="@string/action_update"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_help"
+        android:title="@string/action_how_to_use"
+        app:showAsAction="never"/>
 </menu>

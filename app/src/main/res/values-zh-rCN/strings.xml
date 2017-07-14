@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MUFG Recorder</string>
+    <string name="action_settings">设置</string>
+    <string name="action_done">完成</string>
+    <string name="action_open_ingress">打开Ingress</string>
+    <string name="action_redo">撤销</string>
+    <string name="action_edit">编辑</string>
+    <string name="action_update">更新</string>
+    <string name="action_history">历史</string>
+    <string name="title_set_mufg_id">请输入新红桶的名称</string>
+    <string name="title_check_items_of_new_mufg">请勾选要添加的道具</string>
+    <string name="title_create_new_mufg">创建新的红桶</string>
+    <string name="title_edit_mufg">编辑红桶</string>
+    <string name="title_choose_level">请选择道具的等级</string>
+    <string name="title_update_items_number">更新道具</string>
+    <string name="title_notification">通知</string>
+    <string name="title_set_notification_time">设置通知时间</string>
+    <string name="summary_set_notification_time">时间设置为%1$s</string>
+    <string name="title_notification_ringtone">声音</string>
+    <string name="summary_notification_mute">静音</string>
+    <string name="title_notification_vibrate">震动</string>
+    <string name="hint_id_invalid">ID无效</string>
+    <string name="hint_set_notification">我将会在%1$.1f小时后通知您</string>
+    <string name="hint_out_of_number">道具数量不能超过100！</string>
+    <string name="hint_mufg_saved">已存储！</string>
+    <string name="hint_mufg_deleted">已删除！</string>
+    <string name="hint_mufg_renamed">重命名为%1$s！</string>
+    <string name="hint_history_title">直到现在，这个红桶已经生成了以下道具：</string>
+    <string name="hint_exit_to_app">再按返回键退出</string>
+    <string name="notification_title">请检查您的红桶</string>
+    <string name="notification_text">检查过红桶之后，请单击这个通知来更新道具数量！</string>
+    <string name="title_activity_update">更新道具</string>
+    <string name="title_show_history">历史</string>
+    <string name="action_how_to_use">如何使用</string>
+    <string name="text_help_1">单击主界面的按钮创建一个新的红桶，然后向这个红桶中添加道具。</string>
+    <string name="text_help_2">打开设置中的通知（默认关闭），我将会通知您更新道具数量。</string>
+    <string name="text_help_3">您也可以手动更新道具通过单击菜单中的更新按钮。</string>
+</resources>

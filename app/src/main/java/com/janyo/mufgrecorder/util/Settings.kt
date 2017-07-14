@@ -47,4 +47,14 @@ class Settings(context: Context)
 	{
 		return sharedPreference.getBoolean("notificationVibrate", true)
 	}
+
+	fun setFirstRun(temp: Boolean)
+	{
+		sharedPreference.edit().putBoolean("isFirstRun", temp).apply()
+	}
+
+	fun isFirstRun(): Boolean
+	{
+		return sharedPreference.getBoolean("isFirstRun", true)
+	}
 }

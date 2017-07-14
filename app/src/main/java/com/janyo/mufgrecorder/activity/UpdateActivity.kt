@@ -113,7 +113,7 @@ class UpdateActivity : AppCompatActivity()
 			{
 				CheckNotification.cancel(this)
 				updateList.forEach { it.save() }
-				list.forEach { fileUtil!!.saveObject(it,it.MUFGID,"MUFG") }
+				list.forEach { fileUtil!!.saveObject(it,it.MUFGID,getString(R.string.mufg_dir)) }
 				finish()
 				return true
 			}

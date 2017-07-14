@@ -28,6 +28,7 @@
             android:name=".activity.SettingsActivity"
             android:label="@string/action_settings"
             android:theme="@style/AppTheme.Preference"/>
+
         <service
             android:name=".service.CheckMUFGService"
             android:enabled="true"

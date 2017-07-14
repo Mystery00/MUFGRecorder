@@ -28,7 +28,6 @@ object CheckNotification
 				.setVibrate(vibrates)
 				.setSmallIcon(R.drawable.ic_notifications)
 				.setContentTitle(context.getString(R.string.notification_title))
-				.setContentText(context.getString(R.string.notification_text))
 				.setPriority(NotificationCompat.PRIORITY_DEFAULT)
 				.setNumber(number)
 				.setContentIntent(
@@ -37,6 +36,9 @@ object CheckNotification
 								0,
 								Intent(context, UpdateActivity::class.java),
 								PendingIntent.FLAG_UPDATE_CURRENT))
+				.setStyle(NotificationCompat.BigTextStyle()
+						.setBigContentTitle(context.getString(R.string.notification_title))
+						.bigText(context.getString(R.string.notification_text)))
 				.setAutoCancel(true)
 		if (ingressUtil.getIngressPackageName() != "null")
 		{

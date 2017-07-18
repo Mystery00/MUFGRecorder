@@ -14,14 +14,14 @@ class CheckMUFGService : Service()
 		return null
 	}
 
-	override fun onCreate()
+	override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int
 	{
-		super.onCreate()
 		CheckNotification.notify(this, 1)
 		val settings = Settings(this)
 		val setTime = TimeUtil.getSetTime(TimeUtil.timeFormat(settings.getNotificationTime()))
 		setTime.time += 24 * 3600 * 1000
 		TimeUtil.setAlarm(this, setTime)
 		stopSelf()
+		return super.onStartCommand(intent, flags, startId)
 	}
 }

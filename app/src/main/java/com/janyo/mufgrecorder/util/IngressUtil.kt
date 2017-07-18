@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import com.janyo.mufgrecorder.R
 import android.content.pm.ApplicationInfo
+import android.util.Log
 import com.janyo.mufgrecorder.`class`.MUFG
 import com.janyo.mufgrecorder.`class`.UpdateItems
 import org.litepal.crud.DataSupport
@@ -85,29 +86,33 @@ class IngressUtil(val context: Context)
 
 	fun checkContent(list: ArrayList<HashMap<String, Any>>, mufg: MUFG)
 	{
-		for (item in list)
+		for (i in 0..list.size - 2)
 		{
-			for (it in list)
+			for (j in list.size - 1 downTo i + 1)
 			{
-				if (item == it)
-					continue
-				if (item["name"] == it["name"])
+				val item1 = list[i]
+				val item2 = list[j]
+				if (item1["name"] == item2["name"])
 				{
-					if (item.containsKey("type") &&
-							item["type"] == it["type"] &&
-							item["level"] == it["level"])
+					Log.i("info", "名字相同" + item1["name"])
+					if (item1.containsKey("type") &&
+							item1["type"] == item2["type"] &&
+							item1["level"] == item2["level"])
 					{
-						item.put("number", item["number"] as Int + it["number"] as Int)
-						list.remove(it)
+						Log.i("info", "同等级")
+						item1.put("number", item1["number"] as Int + item2["number"] as Int)
+						list.removeAt(j)
+						break
 					}
-					else if (!item.containsKey("type") &&
-							item.containsKey("keyName") &&
-							item["keyName"] == it["keyName"])
+					else if (!item1.containsKey("type") &&
+							item1.containsKey("keyName") &&
+							item1["keyName"] == item2["keyName"])
 					{
-						item.put("number", item["number"] as Int + it["number"] as Int)
-						list.remove(it)
+						Log.i("info", "同钥匙")
+						item1.put("number", item1["number"] as Int + item2["number"] as Int)
+						list.removeAt(j)
+						break
 					}
-					break
 				}
 			}
 		}

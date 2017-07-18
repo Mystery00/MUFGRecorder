@@ -1,5 +1,8 @@
 package com.janyo.mufgrecorder.adapter
 
+import android.content.Context
+import android.support.design.widget.TextInputLayout
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.AppCompatSpinner
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -16,6 +19,7 @@ import kotlin.collections.HashMap
 class MUFGItemsAdapter(
 		var list: ArrayList<HashMap<String, Any>>) : RecyclerView.Adapter<MUFGItemsAdapter.ViewHolder>()
 {
+	var context: Context? = null
 	override fun getItemCount(): Int
 	{
 		return list.size
@@ -23,7 +27,8 @@ class MUFGItemsAdapter(
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
 	{
-		val view = LayoutInflater.from(parent.context).inflate(R.layout.item_mufg_things, LinearLayout(parent.context), false)
+		context = parent.context
+		val view = LayoutInflater.from(context).inflate(R.layout.item_mufg_things, LinearLayout(context), false)
 		val holder = ViewHolder(view)
 		return holder
 	}
@@ -35,6 +40,24 @@ class MUFGItemsAdapter(
 		holder.itemNumber.minValue = 0
 		holder.itemNumber.maxValue = 100
 		holder.itemNumber.value = map["number"] as Int
+		if (map.containsKey("keyName"))
+		{
+			holder.name.text = map["keyName"] as String
+			holder.name.setOnClickListener {
+				val view = LayoutInflater.from(context!!).inflate(R.layout.text_input_layout, TextInputLayout(context), false)
+				val text_input: TextInputLayout = view.findViewById(R.id.text_input)
+				text_input.editText!!.setText(map["keyName"] as String)
+				AlertDialog.Builder(context!!)
+						.setTitle("test")
+						.setView(view)
+						.setPositiveButton(android.R.string.ok, { _, _ ->
+							val name = text_input.editText!!.text.toString()
+							holder.name.text = name
+							map.put("keyName", name)
+						})
+						.show()
+			}
+		}
 		if (map.containsKey("level"))
 		{
 			when (map["type"])
@@ -85,6 +108,7 @@ class MUFGItemsAdapter(
 	class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 	{
 		var itemName: TextView = itemView.findViewById(R.id.itemName)
+		var name: TextView = itemView.findViewById(R.id.name)
 		var level: AppCompatSpinner = itemView.findViewById(R.id.levelSpinner)
 		var itemLevel: AppCompatSpinner = itemView.findViewById(R.id.itemLevelSpinner)
 		var itemNumber: NumberPicker = itemView.findViewById(R.id.itemNumber)

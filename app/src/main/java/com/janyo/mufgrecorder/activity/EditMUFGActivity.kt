@@ -6,6 +6,8 @@ import android.support.design.widget.TextInputLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -28,6 +30,7 @@ class EditMUFGActivity : AppCompatActivity()
 	private var fileUtil: FileUtil? = null
 	private var items: Array<String>? = null
 	private var checked: BooleanArray? = null
+	private var content = ArrayList<HashMap<String, Any>>()
 	private var adapter: MUFGItemsAdapter? = null
 	private var mufg: MUFG? = null
 	private var menu: Menu? = null
@@ -87,26 +90,43 @@ class EditMUFGActivity : AppCompatActivity()
 			isNew = false
 			@Suppress("CAST_NEVER_SUCCEEDS")
 			mufg = intent.getBundleExtra(INTENT_TAG).getSerializable(INTENT_TAG) as MUFG
-			recyclerView.layoutManager = LinearLayoutManager(this)
-			adapter = MUFGItemsAdapter(mufg!!.content)
-			recyclerView.adapter = adapter
-			for (map in mufg!!.content)
-			{
-				items!!.indices
-						.filter { map["name"] == items!![it] }
-						.forEach { checked!![it] = true }
-			}
+			content.clear()
+			content.addAll(mufg!!.content)
 		}
 
+		recyclerView.layoutManager = LinearLayoutManager(this)
+		adapter = MUFGItemsAdapter(content)
+		val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT)
+		{
+			override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+								target: RecyclerView.ViewHolder): Boolean
+			{
+				return false
+			}
+
+			override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int)
+			{
+				val position = viewHolder.adapterPosition
+				content.removeAt(position)
+				adapter!!.notifyItemRemoved(position)
+			}
+		}
+		ItemTouchHelper(callback).attachToRecyclerView(recyclerView)
+		recyclerView.adapter = adapter
+
 		fab.setOnClickListener {
+			for (i in items!!.indices)
+			{
+				checked!![i] = false
+			}
 			AlertDialog.Builder(this)
 					.setTitle(R.string.title_check_items_of_new_mufg)
 					.setMultiChoiceItems(items, checked, { _, position, checked ->
 						this.checked!![position] = checked
 					})
 					.setPositiveButton(android.R.string.ok, { _, _ ->
-						recyclerView.layoutManager = LinearLayoutManager(this)
-						adapter = MUFGItemsAdapter(ingressUtil!!.ConvertArrayToList(checked!!, items!!, mufg!!))
+						content = ingressUtil!!.ConvertArrayToList(checked!!, items!!, content)
+						adapter!!.notifyDataSetChanged()
 						recyclerView.adapter = adapter
 						menu!!.findItem(R.id.action_done).isVisible = true
 					})
@@ -133,7 +153,7 @@ class EditMUFGActivity : AppCompatActivity()
 			{
 				if (adapter!!.list.sumBy { it["number"] as Int } <= 100)
 				{
-					mufg!!.content = adapter!!.list
+					ingressUtil!!.checkContent(content, mufg!!)
 					fileUtil!!.saveObject(mufg!!, mufg!!.MUFGID, getString(R.string.mufg_dir))
 					Snackbar.make(coordinatorLayout, R.string.hint_mufg_saved, Snackbar.LENGTH_SHORT)
 							.addCallback(object : Snackbar.Callback()

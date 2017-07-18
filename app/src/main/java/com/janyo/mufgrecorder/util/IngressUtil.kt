@@ -12,27 +12,24 @@ import java.util.*
 class IngressUtil(val context: Context)
 {
 	fun ConvertArrayToList(checked: BooleanArray,
-						   items: Array<String>, mufg: MUFG): ArrayList<HashMap<String, Any>>
+						   items: Array<String>,
+						   list: ArrayList<HashMap<String, Any>>): ArrayList<HashMap<String, Any>>
 	{
 		val item_level = context.resources.getStringArray(R.array.ingress_items_level_things)
 		val level = context.resources.getStringArray(R.array.ingress_level_things)
-		val list = ArrayList<HashMap<String, Any>>()
 		for (i in checked.indices)
 		{
 			if (!checked[i])
 			{
 				continue
 			}
+			var isContain = false
 			val map = HashMap<String, Any>()
 			map.put("name", items[i])
 			map.put("number", 0)
-			for (temp in mufg.content)
+			if (items[i] == "Portal Key")
 			{
-				if (temp["name"] == items[i])
-				{
-					map.put("number", temp["number"] as Int)
-					break
-				}
+				map.put("keyName", "null")
 			}
 			if (item_level.contains(items[i]))
 			{
@@ -44,9 +41,77 @@ class IngressUtil(val context: Context)
 				map.put("type", 2)
 				map.put("level", 0)
 			}
-			list.add(map)
+			for (index in list.indices)
+			{
+				if (list[index]["name"] == map["name"])
+				{
+					val oldMap = list[index]
+					if (map.containsKey("type") &&
+							oldMap["type"] == map["type"] &&
+							oldMap["level"] == map["level"])
+					{
+						map.put("number", oldMap["number"] as Int + map["number"] as Int)
+						list[index] = map
+						list.remove(oldMap)
+						isContain = true
+						break
+					}
+					else if (map["name"] == "Portal Key")
+					{
+						if (oldMap["keyName"] == map["keyName"])
+						{
+							map.put("number", oldMap["number"] as Int + map["number"] as Int)
+							list[index] = map
+							list.remove(oldMap)
+							isContain = true
+						}
+						break
+					}
+					else if (!map.containsKey("type"))
+					{
+						map.put("number", oldMap["number"] as Int + map["number"] as Int)
+						list[index] = map
+						list.remove(oldMap)
+						isContain = true
+						break
+					}
+				}
+			}
+			if (!isContain)
+				list.add(map)
 		}
 		return list
+	}
+
+	fun checkContent(list: ArrayList<HashMap<String, Any>>, mufg: MUFG)
+	{
+		for (item in list)
+		{
+			for (it in list)
+			{
+				if (item == it)
+					continue
+				if (item["name"] == it["name"])
+				{
+					if (item.containsKey("type") &&
+							item["type"] == it["type"] &&
+							item["level"] == it["level"])
+					{
+						item.put("number", item["number"] as Int + it["number"] as Int)
+						list.remove(it)
+					}
+					else if (!item.containsKey("type") &&
+							item.containsKey("keyName") &&
+							item["keyName"] == it["keyName"])
+					{
+						item.put("number", item["number"] as Int + it["number"] as Int)
+						list.remove(it)
+					}
+					break
+				}
+			}
+		}
+		mufg.content = list
 	}
 
 	fun getIngressPackageName(): String

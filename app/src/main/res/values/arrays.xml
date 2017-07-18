@@ -31,6 +31,8 @@
         <item>ADA Refactor</item>
         <item>Lawson Power Cube</item>
         <item>Circle-K Power Cube</item>
+        <item>ITO EN Transmuter+</item>
+        <item>ITO EN Transmuter-</item>
     </string-array>
     <string-array name="ingress_item_level" translatable="false">
         <item>common</item>
